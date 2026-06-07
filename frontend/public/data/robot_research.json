@@ -1,0 +1,1039 @@
+{
+  "meta": {
+    "total_reports": 385,
+    "reports_2026": 204,
+    "reports_2025": 181,
+    "stocks_count": 19,
+    "fetch_date": "2026-06-07",
+    "updated_at": "2026-06-07T20:26:07",
+    "source": "东方财富 reportapi.eastmoney.com",
+    "description": "人形机器人产业链深度研报合集（385篇2025-2026年真实东财研报），覆盖19家核心标的"
+  },
+  "modules": {
+    "overview": {
+      "id": "overview",
+      "title": "总览",
+      "icon": "LayoutDashboard",
+      "report_count": 318,
+      "reports": [
+        {
+          "title": "机器人行业研究：宇树科技科创板IPO过会，Open AI进军机器人",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "农林牧渔行业周报：生猪养殖持续亏损，产能去化继续进行",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "非银金融行业周报：基金行业迎三大战略机遇，继续重点推荐头部券商",
+          "org": "开源证券",
+          "date": "2026-06-07",
+          "rating": "持有",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "电子行业周报：Computex大会催化硬件创新，加息预期重燃引发市场调整",
+          "org": "开源证券",
+          "date": "2026-06-07",
+          "rating": "持有",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "农林牧渔行业周报：现货低位震荡延续，仔猪端转弱或影响后续去化节奏",
+          "org": "开源证券",
+          "date": "2026-06-07",
+          "rating": "持有",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "交通运输行业周报：地缘扰动持续，关注Q2盈利增长板块",
+          "org": "华源证券",
+          "date": "2026-06-07",
+          "rating": "增持",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "食品饮料行业周报：市场风格极致，虹吸效应明显，板块底部配置价值显现",
+          "org": "中银证券",
+          "date": "2026-06-07",
+          "rating": "增持",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "非银金融行业跟踪周报：非银板块估值提升空间较大，配置价值凸显",
+          "org": "东吴证券",
+          "date": "2026-06-07",
+          "rating": "增持",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "AI周观察：博通财报良好但预期没有达到最佳",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "通信行业研究：GTC台北大会顺利召开，Spectrum-X硅光交换机量产",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "计算机行业研究：日韩电容巨头巡礼",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "电子行业研究：GPU与ASIC拉货共振，关注业绩有望超预期方向",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "商贸零售行业周报：育儿补助力度加大，母婴行业加速整合",
+          "org": "开源证券",
+          "date": "2026-06-07",
+          "rating": "持有",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "黑色金属周报：焦煤供给恢复偏慢但铁矿宽松，钢厂盈利小幅回调",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "食品饮料行业研究：量贩零食两强强调有序发展，持续关注子板块旺季催化",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "计算机行业研究：国产FAB历史机遇期",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "非金属建材行业周观点：玻璃基板是重要趋势，电子布仍是上游核心材料",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "耐用消费产业行业研究：消费级3D打印行业翻倍增长，TOKEN降价打开AI应用空间",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "石油化工行业研究：地缘与宏观持续扰动，油价高位宽幅震荡",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "有色金属周报：铜铝去库延续，重视钨的第二波和氧化镝涨价",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "医药健康行业研究：CXO龙头公司指引积极乐观，内外需共振驱动板块向上",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "电力设备与新能源行业研究：欧盟“贸易战”恐难开打，把握欧洲链优质龙头错杀机会",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "家电行业研究：IDC温控需求释放，中央空调行业结构性机会凸显",
+          "org": "国金证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "石油加工行业大炼化周报：供需表现偏弱，化工品价格价差弱势下跌",
+          "org": "信达证券",
+          "date": "2026-06-07",
+          "rating": "",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        },
+        {
+          "title": "环保行业周报：2026版中国RoHS目录发布，行业合规管理能力有望进一步提升",
+          "org": "信达证券",
+          "date": "2026-06-07",
+          "rating": "持有",
+          "source": "kw:人形机器人",
+          "module": "overview"
+        }
+      ],
+      "orgs": [
+        "华金证券",
+        "民生证券",
+        "信达证券",
+        "华龙证券",
+        "山西证券",
+        "建银国际证券",
+        "上海证券",
+        "国金证券",
+        "招银国际",
+        "爱建证券",
+        "华安证券",
+        "群益证券",
+        "东莞证券",
+        "中航证券",
+        "中国医药企业管理协会"
+      ]
+    },
+    "cost": {
+      "id": "cost",
+      "title": "成本构成",
+      "icon": "PieChart",
+      "report_count": 11,
+      "reports": [
+        {
+          "title": "商业航天&太空光伏系列深度（二）：SpaceX：发射降本驱动商业闭环，迈向太空基础设施平台建设",
+          "org": "中邮证券",
+          "date": "2026-06-07",
+          "rating": "增持",
+          "source": "kw:人形机器人",
+          "module": "cost"
+        },
+        {
+          "title": "全国玉米价格行情监测周报2026年第21周",
+          "org": "合肥农小蜂数字科技",
+          "date": "2026-06-07",
+          "rating": "",
+          "source": "kw:人形机器人",
+          "module": "cost"
+        },
+        {
+          "title": "永新股份：产能扩张、价格提升，盈利有望呈现弹性",
+          "org": "信达证券",
+          "date": "2026-06-03",
+          "rating": "",
+          "source": "ind:机器人",
+          "module": "cost"
+        },
+        {
+          "title": "Q1销量延续高增，汇兑及成本扰动短期业绩",
+          "org": "国金证券",
+          "date": "2026-04-30",
+          "rating": "买入",
+          "source": "stock:689009",
+          "module": "cost"
+        },
+        {
+          "title": "2025年报及26年一季报点评：工控需求进一步复苏，新能源车受成本&价格压力短期承压",
+          "org": "东吴证券",
+          "date": "2026-04-28",
+          "rating": "买入",
+          "source": "stock:300124",
+          "module": "cost"
+        },
+        {
+          "title": "两轮车需求尚待复苏，多元布局支撑长期价值；下调目标价",
+          "org": "交银国际证券",
+          "date": "2026-04-02",
+          "rating": "买入",
+          "source": "stock:689009",
+          "module": "cost"
+        },
+        {
+          "title": "2025年三季度净利润高增长，降本增效成果显著",
+          "org": "国信证券",
+          "date": "2025-11-07",
+          "rating": "增持",
+          "source": "stock:002050",
+          "module": "cost"
+        },
+        {
+          "title": "降本增效迭代产品放量，二季度净利润同比增长20%",
+          "org": "国信证券",
+          "date": "2025-09-08",
+          "rating": "增持",
+          "source": "stock:002472",
+          "module": "cost"
+        },
+        {
+          "title": "2025H1点评：轻稀土价格上行增厚利润，机器人组件打开成长空间",
+          "org": "中航证券",
+          "date": "2025-08-25",
+          "rating": "买入",
+          "source": "stock:300748",
+          "module": "cost"
+        },
+        {
+          "title": "2024年年报业绩点评：产销持续增长，稀土价格调整拖累业绩",
+          "org": "东兴证券",
+          "date": "2025-04-02",
+          "rating": "增持",
+          "source": "stock:300748",
+          "module": "cost"
+        },
+        {
+          "title": "稀土价格企稳，看好25年量价齐升",
+          "org": "中邮证券",
+          "date": "2025-04-01",
+          "rating": "买入",
+          "source": "stock:300748",
+          "module": "cost"
+        }
+      ],
+      "orgs": [
+        "国金证券",
+        "中邮证券",
+        "东吴证券",
+        "信达证券",
+        "中航证券",
+        "合肥农小蜂数字科技",
+        "国信证券",
+        "东兴证券",
+        "交银国际证券"
+      ]
+    },
+    "reducer": {
+      "id": "reducer",
+      "title": "减速器",
+      "icon": "Gauge",
+      "report_count": 4,
+      "reports": [
+        {
+          "title": "谐波减速器全球龙头，拓展丝杠等新赛道",
+          "org": "国金证券",
+          "date": "2026-01-29",
+          "rating": "买入",
+          "source": "stock:688017",
+          "module": "reducer"
+        },
+        {
+          "title": "系列点评十四：25Q3业绩表现亮眼 机器人减速器星辰大海",
+          "org": "民生证券",
+          "date": "2025-10-29",
+          "rating": "买入",
+          "source": "stock:002472",
+          "module": "reducer"
+        },
+        {
+          "title": "系列点评十三：25Q2业绩表现亮眼 机器人减速器星辰大海",
+          "org": "民生证券",
+          "date": "2025-08-28",
+          "rating": "买入",
+          "source": "stock:002472",
+          "module": "reducer"
+        },
+        {
+          "title": "系列点评十：业绩稳健向上 机器人减速器加速成长",
+          "org": "民生证券",
+          "date": "2025-04-27",
+          "rating": "买入",
+          "source": "stock:002472",
+          "module": "reducer"
+        }
+      ],
+      "orgs": [
+        "国金证券",
+        "民生证券"
+      ]
+    },
+    "leadscrew": {
+      "id": "leadscrew",
+      "title": "丝杠",
+      "icon": "Wrench",
+      "report_count": 6,
+      "reports": [
+        {
+          "title": "业绩平稳向好，持续推进高端轴承与丝杠产品升级",
+          "org": "山西证券",
+          "date": "2025-11-18",
+          "rating": "增持",
+          "source": "stock:603667",
+          "module": "leadscrew"
+        },
+        {
+          "title": "2025年半年报点评：定增加码具身智能项目，关注丝杠产品订单",
+          "org": "国元证券",
+          "date": "2025-09-02",
+          "rating": "增持",
+          "source": "stock:603667",
+          "module": "leadscrew"
+        },
+        {
+          "title": "2024年年度报告及2025一季报点评：主业触底，丝杠产品绑定核心客户有望提供增量",
+          "org": "国元证券",
+          "date": "2025-05-15",
+          "rating": "增持",
+          "source": "stock:603667",
+          "module": "leadscrew"
+        },
+        {
+          "title": "汽车零部件稳中有升，丝杠导轨前景广阔",
+          "org": "国金证券",
+          "date": "2025-04-23",
+          "rating": "买入",
+          "source": "stock:300580",
+          "module": "leadscrew"
+        },
+        {
+          "title": "系列点评三：业绩稳健增长 机器人丝杠量产工艺持续完善",
+          "org": "民生证券",
+          "date": "2025-04-21",
+          "rating": "买入",
+          "source": "stock:300580",
+          "module": "leadscrew"
+        },
+        {
+          "title": "精密制造领域龙头，丝杠布局领先未来可期",
+          "org": "东吴证券",
+          "date": "2025-03-04",
+          "rating": "增持",
+          "source": "stock:603667",
+          "module": "leadscrew"
+        }
+      ],
+      "orgs": [
+        "国元证券",
+        "国金证券",
+        "民生证券",
+        "东吴证券",
+        "山西证券"
+      ]
+    },
+    "motor": {
+      "id": "motor",
+      "title": "电机",
+      "icon": "Zap",
+      "report_count": 6,
+      "reports": [
+        {
+          "title": "先发布局灵巧手电机，拓展机器人产品矩阵",
+          "org": "华源证券",
+          "date": "2026-06-01",
+          "rating": "增持",
+          "source": "stock:603728",
+          "module": "motor"
+        },
+        {
+          "title": "Q3业绩符合预期，机器人执行器业务进展迅速",
+          "org": "华安证券",
+          "date": "2025-11-19",
+          "rating": "买入",
+          "source": "stock:002050",
+          "module": "motor"
+        },
+        {
+          "title": "2025年半年报点评：激光雷达电机获多客户定点，具身智能产品多方位布局",
+          "org": "国元证券",
+          "date": "2025-09-01",
+          "rating": "买入",
+          "source": "stock:300660",
+          "module": "motor"
+        },
+        {
+          "title": "深耕自动化产业，积极布局人形机器人关节电机",
+          "org": "群益证券",
+          "date": "2025-07-17",
+          "rating": "增持",
+          "source": "stock:688160",
+          "module": "motor"
+        },
+        {
+          "title": "运动控制老牌王者，机器人电机风正时济",
+          "org": "东吴证券",
+          "date": "2025-03-06",
+          "rating": "买入",
+          "source": "stock:002979",
+          "module": "motor"
+        },
+        {
+          "title": "深耕空心杯电机业务，人形机器人业务进度领先",
+          "org": "群益证券",
+          "date": "2025-02-25",
+          "rating": "增持",
+          "source": "stock:603728",
+          "module": "motor"
+        }
+      ],
+      "orgs": [
+        "国元证券",
+        "华安证券",
+        "华源证券",
+        "东吴证券",
+        "群益证券"
+      ]
+    },
+    "sensor": {
+      "id": "sensor",
+      "title": "传感器",
+      "icon": "Cpu",
+      "report_count": 0,
+      "reports": [],
+      "orgs": []
+    },
+    "tendon_material": {
+      "id": "tendon_material",
+      "title": "腱绳/新材料",
+      "icon": "FlaskConical",
+      "report_count": 0,
+      "reports": [],
+      "orgs": []
+    },
+    "substitution_risk": {
+      "id": "substitution_risk",
+      "title": "替代风险",
+      "icon": "AlertTriangle",
+      "report_count": 4,
+      "reports": [
+        {
+          "title": "国产晶圆测试探针卡稀缺龙头，高端化与国产替代共振打开成长空间",
+          "org": "东吴证券",
+          "date": "2026-06-07",
+          "rating": "买入",
+          "source": "ind:机器人",
+          "module": "substitution_risk"
+        },
+        {
+          "title": "以太网交换芯片国产替代先锋，Scaleup超节点需求正在爆发",
+          "org": "山西证券",
+          "date": "2026-06-03",
+          "rating": "买入",
+          "source": "ind:机器人",
+          "module": "substitution_risk"
+        },
+        {
+          "title": "首次覆盖：原制奶酪降本增收，国产替代驱动增长",
+          "org": "万联证券",
+          "date": "2026-06-03",
+          "rating": "增持",
+          "source": "ind:机器人",
+          "module": "substitution_risk"
+        },
+        {
+          "title": "热流道系统国产替代\"小巨人\"，拓展新能源电池组及机器人关节打开第二曲线",
+          "org": "华源证券",
+          "date": "2026-06-02",
+          "rating": "增持",
+          "source": "ind:机器人",
+          "module": "substitution_risk"
+        }
+      ],
+      "orgs": [
+        "万联证券",
+        "山西证券",
+        "东吴证券",
+        "华源证券"
+      ]
+    },
+    "valuation": {
+      "id": "valuation",
+      "title": "估值全景",
+      "icon": "BarChart3",
+      "report_count": 36,
+      "reports": [
+        {
+          "title": "1Q26扣非归母净利润同比增长117.16%，新兴领域加速布局",
+          "org": "国信证券",
+          "date": "2026-06-03",
+          "rating": "增持",
+          "source": "ind:机器人",
+          "module": "valuation"
+        },
+        {
+          "title": "产品结构调整升级，25Q4及全年利润率创下历史新高",
+          "org": "中航证券",
+          "date": "2026-06-03",
+          "rating": "买入",
+          "source": "ind:机器人",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年净利润同比增长23%，出海与平台化进展提速",
+          "org": "国信证券",
+          "date": "2026-05-06",
+          "rating": "增持",
+          "source": "stock:002472",
+          "module": "valuation"
+        },
+        {
+          "title": "公司信息更新报告：2026Q1汇兑扰动利润率，看好Q2起收入增速以及盈利能力环比提升",
+          "org": "开源证券",
+          "date": "2026-04-30",
+          "rating": "买入",
+          "source": "stock:689009",
+          "module": "valuation"
+        },
+        {
+          "title": "机器人需求回升，公司25Q4/26Q1净利润大幅增长",
+          "org": "群益证券",
+          "date": "2026-04-23",
+          "rating": "增持",
+          "source": "stock:688017",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年收入及利润同比快速增长，多元化业务持续拓展",
+          "org": "国信证券",
+          "date": "2026-04-14",
+          "rating": "增持",
+          "source": "stock:689009",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年年报业绩点评：产销持续增长，利润高增符合预期",
+          "org": "东兴证券",
+          "date": "2026-04-10",
+          "rating": "增持",
+          "source": "stock:300748",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年净利润较快增长，拓展机器人、服务器液冷等新领域",
+          "org": "国信证券",
+          "date": "2026-04-08",
+          "rating": "增持",
+          "source": "stock:002050",
+          "module": "valuation"
+        },
+        {
+          "title": "公司信息更新报告：2025Q4收入阶段性下滑扰动利润率水平，割草机器人/E-Bike支撑下仍具备成长属性",
+          "org": "开源证券",
+          "date": "2026-04-02",
+          "rating": "买入",
+          "source": "stock:689009",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年报点评：归母净利润同比+62.17%，全球化与技术创新双轮驱动增长",
+          "org": "东吴证券",
+          "date": "2026-04-01",
+          "rating": "买入",
+          "source": "stock:689009",
+          "module": "valuation"
+        },
+        {
+          "title": "九号公司：2025Q4毛利率显著提升，两轮车和机器人增速亮眼",
+          "org": "太平洋",
+          "date": "2026-04-01",
+          "rating": "买入",
+          "source": "stock:689009",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年归母净利润增长近5成，给予“买进”建议",
+          "org": "群益证券",
+          "date": "2026-03-02",
+          "rating": "增持",
+          "source": "stock:688160",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年收入、利润实现较快增长，维持“买进”评级",
+          "org": "群益证券",
+          "date": "2026-02-11",
+          "rating": "增持",
+          "source": "stock:300124",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年利润翻倍增长，维持“买进”评级",
+          "org": "群益证券",
+          "date": "2026-01-30",
+          "rating": "增持",
+          "source": "stock:688017",
+          "module": "valuation"
+        },
+        {
+          "title": "盈利能力稳健，三季度净利润同比增长21%",
+          "org": "国信证券",
+          "date": "2025-11-11",
+          "rating": "增持",
+          "source": "stock:002472",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年第三季度利润同比较快增长，电动两轮车、割草机等持续放量",
+          "org": "国信证券",
+          "date": "2025-11-04",
+          "rating": "增持",
+          "source": "stock:689009",
+          "module": "valuation"
+        },
+        {
+          "title": "3Q公司收入快速增长，利润增速超预期",
+          "org": "群益证券",
+          "date": "2025-10-31",
+          "rating": "增持",
+          "source": "stock:688017",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年三季报点评：通用自动化业务稳增，新能源汽车业务增速亮眼",
+          "org": "民生证券",
+          "date": "2025-10-28",
+          "rating": "买入",
+          "source": "stock:300124",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年前三季度净利润增长27%，联合动力上市后表现良好",
+          "org": "国信证券",
+          "date": "2025-10-28",
+          "rating": "增持",
+          "source": "stock:300124",
+          "module": "valuation"
+        },
+        {
+          "title": "公司信息更新报告：2025Q3营收增速亮眼，费用率阶段性提升不改长期业务成长性",
+          "org": "开源证券",
+          "date": "2025-10-26",
+          "rating": "买入",
+          "source": "stock:689009",
+          "module": "valuation"
+        },
+        {
+          "title": "通用自动化业务回暖，新能源汽车业务增速放缓",
+          "org": "群益证券",
+          "date": "2025-10-24",
+          "rating": "增持",
+          "source": "stock:300124",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年上半年净利润较快提升，机器人零部件持续改进",
+          "org": "国信证券",
+          "date": "2025-09-04",
+          "rating": "增持",
+          "source": "stock:002050",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年半年报点评：营收利润同步增长，各项业务稳步推进",
+          "org": "国元证券",
+          "date": "2025-08-22",
+          "rating": "增持",
+          "source": "stock:688017",
+          "module": "valuation"
+        },
+        {
+          "title": "2Q收入及利润超预期，公司加码具身智能领域",
+          "org": "群益证券",
+          "date": "2025-08-18",
+          "rating": "增持",
+          "source": "stock:688017",
+          "module": "valuation"
+        },
+        {
+          "title": "2025年上半年利润高增长，电动两轮车、割草机等业务打开成长空间",
+          "org": "国信证券",
+          "date": "2025-08-07",
+          "rating": "增持",
+          "source": "stock:689009",
+          "module": "valuation"
+        }
+      ],
+      "orgs": [
+        "国元证券",
+        "民生证券",
+        "东吴证券",
+        "华安证券",
+        "群益证券",
+        "中航证券",
+        "太平洋",
+        "国信证券",
+        "高盛",
+        "开源证券",
+        "东兴证券",
+        "上海证券",
+        "交银国际证券"
+      ]
+    },
+    "yushu": {
+      "id": "yushu",
+      "title": "宇树科技",
+      "icon": "Bot",
+      "report_count": 0,
+      "reports": [],
+      "orgs": []
+    }
+  },
+  "stocks": [
+    {
+      "code": "688017",
+      "name": "绿的谐波",
+      "module": "减速器",
+      "report_count": 0,
+      "price": 393.0,
+      "pe_ttm": 526.85,
+      "pb": 20.19,
+      "mcap_yi": 720.49,
+      "change_pct": 20.0,
+      "consensus_rating": ""
+    },
+    {
+      "code": "300024",
+      "name": "机器人",
+      "module": "总览",
+      "report_count": 0,
+      "price": 15.57,
+      "pe_ttm": -55.39,
+      "pb": 6.02,
+      "mcap_yi": 243.7,
+      "change_pct": 3.39,
+      "consensus_rating": ""
+    },
+    {
+      "code": "002747",
+      "name": "埃斯顿",
+      "module": "总览",
+      "report_count": 0,
+      "price": 31.02,
+      "pe_ttm": 230.61,
+      "pb": 9.27,
+      "mcap_yi": 242.7,
+      "change_pct": 5.19,
+      "consensus_rating": ""
+    },
+    {
+      "code": "300124",
+      "name": "汇川技术",
+      "module": "电机",
+      "report_count": 0,
+      "price": 75.08,
+      "pe_ttm": 42.88,
+      "pb": 5.8,
+      "mcap_yi": 1809.66,
+      "change_pct": 1.25,
+      "consensus_rating": ""
+    },
+    {
+      "code": "603728",
+      "name": "鸣志电器",
+      "module": "电机",
+      "report_count": 0,
+      "price": 65.82,
+      "pe_ttm": 406.91,
+      "pb": 9.27,
+      "mcap_yi": 275.71,
+      "change_pct": 3.62,
+      "consensus_rating": ""
+    },
+    {
+      "code": "002472",
+      "name": "双环传动",
+      "module": "减速器",
+      "report_count": 0,
+      "price": 42.86,
+      "pe_ttm": 28.69,
+      "pb": 3.53,
+      "mcap_yi": 320.82,
+      "change_pct": 3.55,
+      "consensus_rating": ""
+    },
+    {
+      "code": "300660",
+      "name": "江苏雷利",
+      "module": "电机",
+      "report_count": 0,
+      "price": 33.84,
+      "pe_ttm": 72.57,
+      "pb": 5.63,
+      "mcap_yi": 196.59,
+      "change_pct": 4.35,
+      "consensus_rating": ""
+    },
+    {
+      "code": "688160",
+      "name": "步科股份",
+      "module": "电机",
+      "report_count": 0,
+      "price": 122.0,
+      "pe_ttm": 148.4,
+      "pb": 8.62,
+      "mcap_yi": 110.82,
+      "change_pct": 11.35,
+      "consensus_rating": ""
+    },
+    {
+      "code": "002050",
+      "name": "三花智控",
+      "module": "总览",
+      "report_count": 0,
+      "price": 47.51,
+      "pe_ttm": 48.92,
+      "pb": 6.13,
+      "mcap_yi": 1750.36,
+      "change_pct": 1.06,
+      "consensus_rating": ""
+    },
+    {
+      "code": "689009",
+      "name": "九号公司",
+      "module": "总览",
+      "report_count": 0,
+      "price": 36.36,
+      "pe_ttm": 17.66,
+      "pb": 3.56,
+      "mcap_yi": 203.46,
+      "change_pct": 0.36,
+      "consensus_rating": ""
+    },
+    {
+      "code": "300580",
+      "name": "贝斯特",
+      "module": "丝杠",
+      "report_count": 0,
+      "price": 23.45,
+      "pe_ttm": 41.82,
+      "pb": 3.51,
+      "mcap_yi": 110.82,
+      "change_pct": 3.17,
+      "consensus_rating": ""
+    },
+    {
+      "code": "002698",
+      "name": "博实股份",
+      "module": "总览",
+      "report_count": 0,
+      "price": 12.47,
+      "pe_ttm": 25.91,
+      "pb": 3.02,
+      "mcap_yi": 104.78,
+      "change_pct": 2.97,
+      "consensus_rating": ""
+    },
+    {
+      "code": "603667",
+      "name": "五洲新春",
+      "module": "丝杠",
+      "report_count": 0,
+      "price": 74.34,
+      "pe_ttm": 337.71,
+      "pb": 7.14,
+      "mcap_yi": 272.24,
+      "change_pct": 3.48,
+      "consensus_rating": ""
+    },
+    {
+      "code": "300403",
+      "name": "汉宇集团",
+      "module": "传感器",
+      "report_count": 0,
+      "price": 11.11,
+      "pe_ttm": 31.33,
+      "pb": 3.06,
+      "mcap_yi": 47.45,
+      "change_pct": 6.11,
+      "consensus_rating": ""
+    },
+    {
+      "code": "603960",
+      "name": "克来机电",
+      "module": "总览",
+      "report_count": 0,
+      "price": 21.66,
+      "pe_ttm": 267.98,
+      "pb": 5.06,
+      "mcap_yi": 56.79,
+      "change_pct": 1.45,
+      "consensus_rating": ""
+    },
+    {
+      "code": "002979",
+      "name": "雷赛智能",
+      "module": "电机",
+      "report_count": 0,
+      "price": 55.69,
+      "pe_ttm": 72.58,
+      "pb": 9.4,
+      "mcap_yi": 123.5,
+      "change_pct": 4.76,
+      "consensus_rating": ""
+    },
+    {
+      "code": "300748",
+      "name": "金力永磁",
+      "module": "电机",
+      "report_count": 0,
+      "price": 31.12,
+      "pe_ttm": 58.02,
+      "pb": 5.81,
+      "mcap_yi": 351.67,
+      "change_pct": 1.01,
+      "consensus_rating": ""
+    },
+    {
+      "code": "688277",
+      "name": "天智航",
+      "module": "总览",
+      "report_count": 0,
+      "price": 16.66,
+      "pe_ttm": -35.17,
+      "pb": 6.57,
+      "mcap_yi": 75.97,
+      "change_pct": -0.48,
+      "consensus_rating": ""
+    },
+    {
+      "code": "688218",
+      "name": "江苏北人",
+      "module": "总览",
+      "report_count": 0,
+      "price": 43.72,
+      "pe_ttm": -87.74,
+      "pb": 5.97,
+      "mcap_yi": 50.92,
+      "change_pct": 4.27,
+      "consensus_rating": ""
+    }
+  ]
+}
