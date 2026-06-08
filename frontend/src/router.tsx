@@ -22,6 +22,12 @@ const AlphaZoo = lazy(() =>
 const RobotResearch = lazy(() =>
   import("@/pages/RobotResearch").then((m) => ({ default: m.RobotResearch })),
 );
+const Gold = lazy(() =>
+  import("@/pages/Gold").then((m) => ({ default: m.Gold })),
+);
+const Futures = lazy(() =>
+  import("@/pages/Futures").then((m) => ({ default: m.Futures })),
+);
 
 function PageLoader() {
   return (
@@ -53,6 +59,8 @@ export const router = createBrowserRouter([
       { path: "/alpha-zoo", element: wrap(AlphaZoo) },
       { path: "/alpha-zoo/bench", element: wrap(AlphaZoo) },
       { path: "/alpha-zoo/:alphaId", element: wrap(AlphaZoo) },
+      { path: "/gold", element: wrap(Gold) },
+      { path: "/futures", element: wrap(Futures) },
     ],
   },
 ]);

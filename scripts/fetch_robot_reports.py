@@ -139,6 +139,7 @@ def fetch_eastmoney_reports(code: str, name: str, max_count: int = 10) -> list[d
             f"stockCode={code}&industryName=*&pageSize={max_count}&pageNo=1"
             f"&beginTime=2026-01-01&endTime=2026-12-31"
             f"&sortColumns=PUBLISHDATE&sortTypes=-1"
+            f"&qType=0"
         )
         req = urllib.request.Request(url)
         req.add_header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
@@ -147,8 +148,13 @@ def fetch_eastmoney_reports(code: str, name: str, max_count: int = 10) -> list[d
         with urllib.request.urlopen(req, timeout=15) as resp:
             data = json.loads(resp.read().decode("utf-8"))
 
-        if data.get("success") and data.get("result", {}).get("data"):
-            for item in data["result"]["data"]:
+        # API v2 format: {"hits": N, "data": [...]}
+        items = data.get("data", [])
+        if not items:
+            # Fallback: old API format {"success": true, "result": {"data": [...]}}
+            items = data.get("result", {}).get("data", [])
+
+        for item in items:
                 title = item.get("title", "")
                 org = item.get("orgSName", "")
                 date = item.get("publishDate", "")[:10]
@@ -156,9 +162,12 @@ def fetch_eastmoney_reports(code: str, name: str, max_count: int = 10) -> list[d
                     "title": title,
                     "org": org,
                     "date": date,
+                    "code": code,
+                    "name": name,
                     "rating": item.get("rateName", "") or item.get("indvRating", ""),
                     "module": classify_report(title, org),
                     "hash": report_hash(title, org, date),
+                    "codes": [code],  # track all stock codes this report relates to
                 })
     except Exception as e:
         print(f"  [WARN] 东财研报获取失败 {code} {name}: {e}", file=sys.stderr)

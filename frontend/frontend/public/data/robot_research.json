@@ -3,7 +3,7 @@
     "total_reports": 48,
     "stocks_count": 19,
     "fetch_date": "2026-06-08",
-    "updated_at": "2026-06-08T22:58:09",
+    "updated_at": "2026-06-08T22:53:57",
     "source": "东方财富研报 (a-stock-data)",
     "description": "人形机器人产业链深度研报合集，覆盖19家核心标的，按10个维度分类"
   },
@@ -372,7 +372,7 @@
     {
       "code": "688017",
       "name": "绿的谐波",
-      "module": "reducer",
+      "module": "valuation",
       "report_count": 7,
       "consensus_rating": "",
       "avg_pe": null,
@@ -390,7 +390,7 @@
     {
       "code": "002747",
       "name": "埃斯顿",
-      "module": "overview",
+      "module": "valuation",
       "report_count": 4,
       "consensus_rating": "",
       "avg_pe": null,
@@ -399,7 +399,7 @@
     {
       "code": "300124",
       "name": "汇川技术",
-      "module": "cost",
+      "module": "valuation",
       "report_count": 7,
       "consensus_rating": "",
       "avg_pe": null,
@@ -417,7 +417,7 @@
     {
       "code": "002472",
       "name": "双环传动",
-      "module": "overview",
+      "module": "valuation",
       "report_count": 3,
       "consensus_rating": "",
       "avg_pe": null,
@@ -444,7 +444,7 @@
     {
       "code": "002050",
       "name": "三花智控",
-      "module": "overview",
+      "module": "valuation",
       "report_count": 5,
       "consensus_rating": "",
       "avg_pe": null,
@@ -453,7 +453,7 @@
     {
       "code": "689009",
       "name": "九号公司",
-      "module": "overview",
+      "module": "valuation",
       "report_count": 14,
       "consensus_rating": "",
       "avg_pe": null,
@@ -507,7 +507,7 @@
     {
       "code": "002979",
       "name": "雷赛智能",
-      "module": "overview",
+      "module": "valuation",
       "report_count": 2,
       "consensus_rating": "",
       "avg_pe": null,

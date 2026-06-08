@@ -175,6 +175,50 @@ export const api = {
       method: "POST",
     }),
 
+  // Gold API
+  fetchGoldPrice: () => request<GoldPriceResponse>("/api/market/gold/price"),
+  fetchGoldKlines: (type = "daily", count = 200) =>
+    request<GoldKlinesResponse>(`/api/market/gold/klines?type=${type}&count=${count}`),
+  fetchGoldKlinesLondon: (type = "daily", count = 200) =>
+    request<GoldKlinesResponse>(`/api/market/gold/klines/london?type=${type}&count=${count}`),
+  fetchGoldKlinesAu9999: (type = "daily", count = 200) =>
+    request<GoldKlinesResponse>(`/api/market/gold/klines/au9999?type=${type}&count=${count}`),
+  fetchGoldIntraday: () => request<GoldIntradayResponse>("/api/market/gold/intraday"),
+  fetchGoldIntradayLondon: () => request<GoldIntradayResponse>("/api/market/gold/intraday/london"),
+  fetchGoldNews: () => request<GoldNewsResponse>("/api/market/gold/news"),
+  refreshGoldNews: () =>
+    request<GoldNewsResponse>("/api/market/gold/news/refresh", { method: "POST" }),
+  fetchGoldNarrative: () => request<GoldNarrativeResponse>("/api/market/gold/narrative"),
+  fetchGoldAccumulation: () => request<GoldAccumulationResponse>("/api/market/gold/accumulation"),
+  saveGoldAccumulation: (plan: Partial<GoldAccumulationPlan>) =>
+    request<GoldAccumulationResponse>("/api/market/gold/accumulation", {
+      method: "POST",
+      body: JSON.stringify(plan),
+    }),
+
+  // Gold account API (同花顺个人账户)
+  fetchGoldAccountStatus: () => request<GoldAccountStatusResponse>("/api/market/gold/account/status"),
+  connectGoldAccount: (account?: { account_id?: string; account_name?: string }) =>
+    request<GoldAccountConnectResponse>("/api/market/gold/account/connect", {
+      method: "POST",
+      body: JSON.stringify(account || {}),
+    }),
+  disconnectGoldAccount: () =>
+    request<{ status: string; message: string }>("/api/market/gold/account/disconnect", {
+      method: "POST",
+    }),
+  fetchGoldPositions: () => request<GoldPositionsResponse>("/api/market/gold/account/positions"),
+  fetchGoldOrders: () => request<GoldOrdersResponse>("/api/market/gold/account/orders"),
+  goldAccountBuy: (amount_g: number, price: number) =>
+    request<GoldAccountBuyResponse>("/api/market/gold/account/buy", {
+      method: "POST",
+      body: JSON.stringify({ amount_g, price }),
+    }),
+
+  // Index Futures API
+  fetchFuturesList: () => request<FuturesListResponse>("/api/market/futures"),
+  fetchFuturesHoldings: () => request<FuturesHoldingsResponse>("/api/market/futures/holdings"),
+
   // Connector runtime channel — privileged surface actions (NOT agent tools).
   // commit is the ONLY action that writes a mandate; halt trips the kill switch.
   commitMandate: (body: CommitMandateRequest) =>
@@ -998,4 +1042,205 @@ export interface MessageItem {
   created_at: string;
   linked_attempt_id?: string;
   metadata?: Record<string, unknown>;
+}
+
+// --- Gold types ---
+
+export interface GoldPriceData {
+  code: string;
+  name: string;
+  price: number | null;
+  change_pct: number | null;
+  change_amt: number | null;
+  high: number | null;
+  low: number | null;
+  open: number | null;
+  unit: string;
+}
+
+export interface GoldPriceResponse {
+  status: string;
+  spot: GoldPriceData;
+  china_gold: GoldPriceData;
+  updated_at: string | null;
+}
+
+export interface GoldKlinesResponse {
+  status: string;
+  code: string;
+  name: string;
+  type: string;
+  count: number;
+  bars: PriceBar[];
+}
+
+export interface GoldNewsItem {
+  id: string;
+  title: string;
+  source: string;
+  time: string;
+  url: string;
+  sentiment: "bullish" | "bearish" | "neutral";
+}
+
+export interface GoldNewsResponse {
+  status: string;
+  count: number;
+  news: GoldNewsItem[];
+}
+
+export interface GoldNarrativeModule {
+  id: string;
+  title: string;
+  icon: string;
+  summary: string;
+  key_points: string[];
+}
+
+export interface GoldNarrativeResponse {
+  status: string;
+  count: number;
+  modules: GoldNarrativeModule[];
+}
+
+export interface GoldAccumulationPlan {
+  accumulation_enabled: boolean;
+  broker: string;
+  frequency: "daily" | "weekly" | "monthly";
+  amount_cny: number;
+  max_price_cny_per_g: number | null;
+  auto_sell_profit_pct: number;
+  auto_sell_stop_pct: number;
+  total_invested: number;
+  current_holding_g: number;
+  avg_cost: number;
+  last_execution: string | null;
+  next_execution: string | null;
+  plan_status: "active" | "paused" | "inactive";
+}
+
+export interface GoldAccumulationResponse {
+  status: string;
+  plan: GoldAccumulationPlan;
+  message?: string;
+}
+
+export interface GoldIntradayResponse {
+  status: string;
+  code: string;
+  bars: PriceBar[];
+}
+
+// --- Gold account types (同花顺个人账户) ---
+
+export interface GoldAccountData {
+  connected: boolean;
+  broker: string;
+  account_id: string;
+  account_name: string;
+  balance_cny: number;
+  total_asset_cny: number;
+  total_profit_cny: number;
+  total_profit_pct: number;
+  current_holding_g?: number;
+  avg_cost?: number;
+  positions: GoldPosition[];
+  orders: GoldAccountOrder[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface GoldAccountStatusResponse {
+  status: string;
+  account: GoldAccountData;
+}
+
+export interface GoldAccountConnectResponse {
+  status: string;
+  message: string;
+  account: GoldAccountData;
+}
+
+export interface GoldPosition {
+  code: string;
+  name: string;
+  holding_g: number;
+  avg_cost: number;
+  current_price: number;
+  market_value: number;
+  profit_cny: number;
+  profit_pct: number;
+}
+
+export interface GoldPositionsResponse {
+  status: string;
+  positions: GoldPosition[];
+}
+
+export interface GoldAccountOrder {
+  id: string;
+  type: "buy" | "sell";
+  amount_g: number;
+  price: number;
+  amount_cny: number;
+  time: string;
+  status: "completed" | "pending" | "failed";
+}
+
+export interface GoldOrdersResponse {
+  status: string;
+  count: number;
+  orders: GoldAccountOrder[];
+}
+
+export interface GoldAccountBuyResponse {
+  status: string;
+  message: string;
+  order: GoldAccountOrder;
+  account: GoldAccountData;
+}
+
+// --- Index Futures (股指期货) types ---
+
+export interface FuturesContract {
+  code: string;
+  name: string;
+  index: string;
+}
+
+export interface FuturesListResponse {
+  status: string;
+  contracts: FuturesContract[];
+}
+
+export interface BrokerHolding {
+  rank: number;
+  broker: string;
+  buy_oi: number;
+  sell_oi: number;
+  net_oi: number;
+  buy_vol: number;
+  sell_vol: number;
+  buy_oi_change: number;
+  sell_oi_change: number;
+}
+
+export interface FuturesSummary {
+  total_buy_oi: number;
+  total_sell_oi: number;
+  net_oi: number;
+  total_buy_vol: number;
+  total_sell_vol: number;
+}
+
+export interface FuturesContractData {
+  contract: FuturesContract;
+  date: string;
+  brokers: BrokerHolding[];
+  summary: FuturesSummary;
+}
+
+export interface FuturesHoldingsResponse {
+  status: string;
+  data: Record<string, FuturesContractData>;
 }
