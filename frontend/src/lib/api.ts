@@ -188,6 +188,10 @@ export const api = {
   fetchGoldNews: () => request<GoldNewsResponse>("/api/market/gold/news"),
   refreshGoldNews: () =>
     request<GoldNewsResponse>("/api/market/gold/news/refresh", { method: "POST" }),
+  refreshGoldData: () =>
+    request<{ status: string; message: string; date: string; contracts: number; total_bars: number }>(
+      "/api/market/gold/refresh", { method: "POST" }
+    ),
   fetchGoldNarrative: () => request<GoldNarrativeResponse>("/api/market/gold/narrative"),
   fetchGoldAccumulation: () => request<GoldAccumulationResponse>("/api/market/gold/accumulation"),
   saveGoldAccumulation: (plan: Partial<GoldAccumulationPlan>) =>
@@ -218,6 +222,12 @@ export const api = {
   // Index Futures API
   fetchFuturesList: () => request<FuturesListResponse>("/api/market/futures"),
   fetchFuturesHoldings: () => request<FuturesHoldingsResponse>("/api/market/futures/holdings"),
+  fetchFuturesQuotes: () => request<FuturesQuotesResponse>("/api/market/futures/quotes"),
+  fetchFuturesCcpm: () => request<CcpmResponse>("/api/market/futures/ccpm"),
+
+  // Fund Flow API
+  fetchFundFlow: (date = "") => request<FundFlowResponse>(`/api/fund-flow${date ? `?date=${date}` : ""}`),
+  fetchFundFlowDates: () => request<FundFlowDatesResponse>("/api/fund-flow/dates"),
 
   // Connector runtime channel — privileged surface actions (NOT agent tools).
   // commit is the ONLY action that writes a mandate; halt trips the kill switch.
@@ -1062,6 +1072,7 @@ export interface GoldPriceResponse {
   status: string;
   spot: GoldPriceData;
   china_gold: GoldPriceData;
+  sge_gold?: GoldPriceData;
   updated_at: string | null;
 }
 
@@ -1243,4 +1254,102 @@ export interface FuturesContractData {
 export interface FuturesHoldingsResponse {
   status: string;
   data: Record<string, FuturesContractData>;
+}
+
+export interface FuturesQuoteContract {
+  "品种": string;
+  "品种名称": string;
+  "合约名称": string;
+  "开盘价": number;
+  "最高价": number;
+  "最低价": number;
+  "最新价": number;
+  "涨跌": number;
+  "买价": number;
+  "买量": number;
+  "卖价": number;
+  "卖量": number;
+  "成交量": number;
+  "持仓量": number;
+}
+
+export interface FuturesQuotesSummary {
+  "品种": string[];
+  "品种名称": Record<string, string>;
+  "合约月份": string[];
+  "统计": Record<string, { "主力合约": string; "最大成交量": number; "最大持仓量": number }>;
+}
+
+export interface FuturesQuotesResponse {
+  status: string;
+  source: string;
+  sourceUrl: string;
+  date: string;
+  contracts: FuturesQuoteContract[];
+  summary: FuturesQuotesSummary;
+}
+
+// --- CCFPM (成交持仓排名) types ---
+
+export interface CcpmRankEntry {
+  rank: number;
+  shortName: string;
+  volume: number;
+  varVolume: number;
+  partyId: string;
+}
+
+export interface CcpmContractSummary {
+  totalVolume: number;
+  totalBuyPosition: number;
+  totalSellPosition: number;
+  netPosition: number;
+}
+
+export interface CcpmContract {
+  instrumentId: string;
+  tradingDay: string;
+  summary: CcpmContractSummary;
+  volumeRankings: CcpmRankEntry[];
+  buyPositionRankings: CcpmRankEntry[];
+  sellPositionRankings: CcpmRankEntry[];
+}
+
+export interface CcpmProduct {
+  source: string;
+  sourceUrl: string;
+  product: string;
+  productName: string;
+  date: string;
+  contracts: Record<string, CcpmContract>;
+}
+
+export interface CcpmResponse {
+  status: string;
+  date: string;
+  data: Record<string, CcpmProduct>;
+}
+
+export interface FundFlowRow {
+  name: string;
+  value: number;
+  buy: number;
+  sell: number;
+}
+
+export interface FundFlowResponse {
+  source: string;
+  sourceUrl: string;
+  updatedAt: string;
+  unit: string;
+  rows: FundFlowRow[];
+  availableDates: string[];
+  requestedDate: string;
+  actualDate: string;
+  exactMatch: boolean;
+  _note?: string;
+}
+
+export interface FundFlowDatesResponse {
+  dates: string[];
 }

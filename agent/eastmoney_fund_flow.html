@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>6月01日 全天资金流向</title>
+<style>
+html,body{height:100%}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:transparent;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  color:#fff;
+}
+.phone{
+  width:100%;
+  height:100%;
+  background:#0d0d0d;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 12px 32px rgba(0,0,0,.12);
+  display:flex;
+  flex-direction:row;
+}
+.poster{
+  flex:1;
+  min-width:0;
+  position:relative;
+  background:linear-gradient(180deg,#0d0d0d 0%,#0d0d0d 72%,#111 100%);
+  padding:24px 28px 0;
+}
+.title{
+  text-align:center;
+  font-size:16px;
+  line-height:1.2;
+  font-weight:900;
+  color:#fff43a;
+  -webkit-text-stroke:1px #0f0f0f;
+  text-shadow:
+    1px 1px 0 #0f0f0f,
+    -1px 1px 0 #0f0f0f,
+    0 2px 2px rgba(0,0,0,.24);
+  padding:4px 0;
+}
+.chart-wrap{
+  position:absolute;
+  left:24px;
+  right:24px;
+  top:8px;
+  bottom:8px;
+}
+.player{
+  width:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#111;
+  border-left:1px solid #222;
+}
+.play-btn{
+  width:36px;
+  height:36px;
+  border:1px solid #555;
+  border-radius:8px;
+  background:#1a1a1a;
+  color:#ccc;
+  font-size:16px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background .15s;
+}
+.play-btn:hover{background:#333}
+#chart{
+  display:block;
+  width:100%;
+  height:100%;
+}
+@media(max-width:560px){
+  body{padding:0;background:#0d0d0d}
+  .phone{width:100%;border-radius:0;box-shadow:none;flex-direction:column}
+  .poster{padding:22px 16px 0}
+  .title{font-size:14px}
+  .chart-wrap{left:14px;right:14px;top:6px;bottom:6px}
+}
+</style>
+</head>
+<body>
+<main class="phone">
+  <section class="poster">
+    <div class="chart-wrap">
+      <canvas id="chart"></canvas>
+    </div>
+  </section>
+  <section class="player">
+    <button class="play-btn" id="playBtn" title="播放/暂停">
+      <span id="playIcon">▶</span>
+    </button>
+  </section>
+</main>
+<h1 class="title" id="pageTitle">6月01日 全天资金流向</h1>
+
+<script>
+const TOTAL_FRAMES = 50;
+const END_FRAME = TOTAL_FRAMES - 1;
+
+const fallbackSectors = [
+  {name:'通信', value:159.06, color:'#681014', group:'top', amp:6, peak:42},
+  {name:'通信设备', value:155.23, color:'#a85028', group:'top', amp:24, peak:34},
+  {name:'通信高新技术', value:81.84, color:'#b75b23', group:'top', amp:18, peak:31},
+  {name:'有色金属', value:80.59, color:'#be4b2f', group:'top', amp:17, peak:29},
+  {name:'通信及电子制造', value:73.39, color:'#c9a544', group:'top', amp:18, peak:22},
+  {name:'计算机设备', value:64.17, color:'#7f7934', group:'top', amp:10, peak:13},
+  {name:'银行', value:-10.21, color:'#526c6f', group:'mid', amp:16, peak:21},
+  {name:'房地产', value:-15.40, color:'#75999f', group:'mid', amp:20, peak:27},
+  {name:'电力', value:-23.92, color:'#2e6786', group:'mid', amp:20, peak:24},
+  {name:'建筑装饰', value:-33.50, color:'#1e5f91', group:'low', amp:13, peak:13},
+  {name:'汽车', value:-38.26, color:'#244d65', group:'low', amp:16, peak:21},
+  {name:'家用电器', value:-39.23, color:'#0f6b4d', group:'low', amp:9, peak:12},
+  {name:'半导体', value:-41.91, color:'#26715a', group:'low', amp:10, peak:10},
+  {name:'传媒', value:-48.79, color:'#286d56', group:'deep', amp:8, peak:8},
+  {name:'通用设备', value:-74.78, color:'#155d3f', group:'deep', amp:11, peak:14}
+];
+
+const palette = ['#8b1a1a','#a8321d','#b8451f','#c4552a','#d46635','#e07828','#e0891a','#c9a544','#9b8c2e','#7f7934','#526c6f','#75999f','#2e6786','#1e5f91','#244d65','#0a6b4d','#0f7b4d','#167a52','#1d7058','#155d3f','#0a5a35','#06462f'];
+let labelOrder = [];
+
+let sectors = [];
+let labelY = {};
+let selectedDate = new URLSearchParams(window.location.search).get('date') || toDateInputValue(new Date());
+
+const canvas = document.getElementById('chart');
+const ctx = canvas.getContext('2d');
+const pageTitle = document.getElementById('pageTitle');
+const playBtn = document.getElementById('playBtn');
+const playIcon = document.getElementById('playIcon');
+
+let dpr = 1;
+let currentFrame = END_FRAME;
+let playing = false;
+let timer = null;
+
+function pad2(n){return String(n).padStart(2,'0')}
+function toDateInputValue(date){
+  return date.getFullYear() + '-' + pad2(date.getMonth()+1) + '-' + pad2(date.getDate());
+}
+function dateTitle(dateStr){
+  const [y,m,d] = dateStr.split('-').map(Number);
+  return `${m}月${pad2(d)}日 全天资金流向`;
+}
+function thsRows(){
+  const payload = window.THS_BOARD_DATA;
+  if(payload && Array.isArray(payload.rows) && payload.rows.length){
+    return payload.rows.filter(row => row.name && Number.isFinite(Number(row.value)));
+  }
+  return [];
+}
+function buildLabelY(list){
+  const ordered = [...list].sort((a,b)=>b.value-a.value);
+  const result = {};
+  let previous = 84;
+  for(const item of ordered){
+    let y = Math.min(item.value, previous);
+    y = Math.max(-145, y);
+    if(previous - y < 7.2) y = previous - 7.2;
+    result[item.name] = Math.max(-145, y);
+    previous = result[item.name];
+  }
+  return result;
+}
+function selectDisplayRows(rows){
+  const positives = rows.filter(row => Number(row.value) >= 0).sort((a,b)=>Number(b.value)-Number(a.value)).slice(0,10);
+  const negatives = rows.filter(row => Number(row.value) < 0).sort((a,b)=>Number(a.value)-Number(b.value)).slice(0,10);
+  const picked = [...positives, ...negatives];
+  if(picked.length === 20) return picked;
+  const selected = new Set(picked.map(row => row.name));
+  const fillers = [...rows]
+    .filter(row => !selected.has(row.name))
+    .sort((a,b)=>Math.abs(Number(b.value))-Math.abs(Number(a.value)))
+    .slice(0,20 - picked.length);
+  return [...picked, ...fillers];
+}
+function generateSectors(sourceData){
+  const rows = sourceData && sourceData.length
+    ? selectDisplayRows(sourceData)
+    : selectDisplayRows(thsRows());
+  const sourceRows = rows.length ? rows : fallbackSectors;
+  const maxAbs = Math.max(...sourceRows.map(r => Math.abs(Number(r.value))), 1);
+  return sourceRows.map((row,idx)=>{
+    const value = Number(row.value);
+    const absVal = Math.abs(value);
+    const rel = absVal / maxAbs;
+    const group = value >= 0
+      ? (rel > 0.6 ? 'top' : rel > 0.25 ? 'mid' : 'low')
+      : (rel > 0.6 ? 'deep' : rel > 0.25 ? 'low' : 'mid');
+    return {
+      name: row.name,
+      value: Math.round(value * 100) / 100,
+      buy: Math.round((Number(row.buy ?? 0)) * 100) / 100,
+      sell: Math.round((Number(row.sell ?? 0)) * 100) / 100,
+      color: palette[idx % palette.length],
+      group,
+      amp: Math.max(0.3, absVal * (0.15 + idx * 0.03)),
+      peak: Math.max(0.5, absVal * (0.25 + idx * 0.05))
+    };
+  });
+}
+let currentDataRows = null;
+let serverMeta = null;
+
+async function fetchDataForDate(dateStr){
+  // Use preloaded data from the HTML template if available (fast path)
+  var preloaded = window.__FUND_FLOW_DATA__;
+  if (preloaded && preloaded.rows && preloaded.rows.length) {
+    serverMeta = {
+      updatedAt: preloaded.updatedAt || '',
+      source: preloaded.source || '东方财富',
+      requestedDate: preloaded.requestedDate || preloaded.actualDate || '',
+      actualDate: preloaded.actualDate || '',
+      exactMatch: preloaded.exactMatch,
+      note: preloaded._note || ''
+    };
+    window.__FUND_FLOW_DATA__ = null;  // consume once
+    return preloaded.rows;
+  }
+  // Fallback: fetch from API
+  try {
+    const resp = await fetch('/api/fund-flow?date=' + dateStr, {signal: AbortSignal.timeout(3000)});
+    if(resp.ok){
+      const json = await resp.json();
+      if(json.rows && json.rows.length){
+        serverMeta = {
+          updatedAt: json.updatedAt,
+          cached: json.cached,
+          source: json.source,
+          requestedDate: json.requestedDate,
+          actualDate: json.actualDate,
+          exactMatch: json.exactMatch,
+          note: json._note
+        };
+        return json.rows;
+      }
+    }
+  } catch(e){ /* server not running */ }
+  serverMeta = null;
+  return thsRows();
+}
+
+async function applyDate(dateStr){
+  selectedDate = dateStr;
+  stop();
+  pageTitle.textContent = dateTitle(dateStr);
+  document.title = dateTitle(dateStr);
+  const rows = await fetchDataForDate(dateStr);
+  currentDataRows = rows;
+  sectors = generateSectors(currentDataRows); cachedYRange = null;
+  labelOrder = sectors.map(s => s.name);
+  labelY = buildLabelY(sectors);
+  for(const s of sectors) s.points = seriesFor(s);
+  setFrame(END_FRAME);
+}
+
+function frameToTime(frame){
+  const minutes = tradingFrameToMinutes(frame);
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0');
+}
+
+function tradingFrameToMinutes(frame){
+  return 9 * 60 + 30 + frame * (330 / 49);
+}
+
+function easeOut(t){return 1 - Math.pow(1 - t, 2.2)}
+function wiggle(i, seed, scale){
+  const s = scale || 1;
+  return Math.sin(i * .95 + seed) * 1.1 * s + Math.sin(i * 2.1 + seed * .7) * 0.6 * s;
+}
+
+function seriesFor(sector){
+  const pts = [];
+  const end = sector.value;
+  for(let i=0;i<TOTAL_FRAMES;i++){
+    const t = i / END_FRAME;
+    let y = end * easeOut(t);
+    const bump = Math.sin(Math.PI * t) * sector.amp;
+    const earlyShock = Math.exp(-Math.pow((t - .08) / .045,2)) * (sector.group === 'deep' ? -sector.amp * 4 : sector.group === 'low' ? -sector.amp * 2 : sector.amp * 2);
+    const topSurge = sector.group === 'top' ? Math.exp(-Math.pow((t - .55) / .18,2)) * sector.peak : 0;
+    const warmSurge = (sector.group === 'top' && sector.value >= 0) ? Math.exp(-Math.pow((t - .45) / .20,2)) * sector.peak : 0;
+    const midLift = sector.group === 'mid' ? Math.exp(-Math.pow((t - .36) / .23,2)) * sector.peak : 0;
+    const deepDrop = sector.group === 'deep' ? -Math.exp(-Math.pow((t - .72) / .22,2)) * sector.peak : 0;
+    y += bump * (end >= 0 ? 1 : -.55) + earlyShock + topSurge + warmSurge + midLift + deepDrop + wiggle(i, sector.name.length, sector.amp * 0.3);
+    if(i === END_FRAME) y = end;
+    pts.push(y);
+  }
+  return pts;
+}
+
+function resize(){
+  const rect = canvas.parentElement.getBoundingClientRect();
+  if(rect.width <= 0 || rect.height <= 0) return;
+  dpr = window.devicePixelRatio || 1;
+  canvas.width = Math.floor(rect.width * dpr);
+  canvas.height = Math.floor(rect.height * dpr);
+  canvas.style.width = rect.width + 'px';
+  canvas.style.height = rect.height + 'px';
+  draw();
+}
+
+function computeYRange(){
+  if(!sectors.length) return {minY:-150, maxY:90};
+  let globalMin = Infinity, globalMax = -Infinity;
+  for(const s of sectors){
+    if(!s.points) continue;
+    for(let i=0;i<=END_FRAME;i++){
+      const v = s.points[i];
+      if(v < globalMin) globalMin = v;
+      if(v > globalMax) globalMax = v;
+    }
+  }
+  if(!isFinite(globalMin) || !isFinite(globalMax)) return {minY:-150, maxY:90};
+  const range = Math.max(globalMax - globalMin, 20);
+  const pad = range * 0.15;
+  const rawMin = globalMin - pad;
+  const rawMax = globalMax + pad;
+  const roundStep = range < 20 ? 5 : range < 50 ? 10 : range < 120 ? 20 : range < 250 ? 50 : 100;
+  return {
+    minY: Math.floor(rawMin / roundStep) * roundStep,
+    maxY: Math.ceil(rawMax / roundStep) * roundStep
+  };
+}
+
+let cachedYRange = null;
+
+function generateYTicks(l){
+  const range = l.maxY - l.minY;
+  const step = range < 20 ? 5 : range < 50 ? 10 : range < 120 ? 20 : range < 250 ? 50 : 100;
+  const ticks = [];
+  for(let v = Math.ceil(l.minY / step) * step; v <= l.maxY; v += step){
+    ticks.push(v);
+  }
+  if(!ticks.includes(0) && l.minY <= 0 && l.maxY >= 0) ticks.push(0);
+  ticks.sort((a,b)=>a-b);
+  return ticks;
+}
+
+function layout(){
+  if(!cachedYRange) cachedYRange = computeYRange();
+  const w = canvas.width / dpr;
+  const h = canvas.height / dpr;
+  const plotBottom = h - 26;
+  const plotTop = 40;
+  const margin = {left:90,right:90,top:plotTop,bottom:h - plotBottom};
+  return {
+    w,h,margin,
+    left:margin.left,
+    right:w - margin.right,
+    top:plotTop,
+    bottom:plotBottom,
+    minY: cachedYRange.minY,
+    maxY: cachedYRange.maxY
+  };
+}
+
+function xFor(frame,l){
+  const start = 9 * 60 + 30;
+  const end = 15 * 60;
+  return l.left + (tradingFrameToMinutes(frame) - start) / (end - start) * (l.right - l.left);
+}
+function xForMinutes(minutes,l){
+  const start = 9 * 60 + 30;
+  const end = 15 * 60;
+  return l.left + (minutes - start) / (end - start) * (l.right - l.left);
+}
+function yFor(value,l){
+  return l.bottom - (value - l.minY) / (l.maxY - l.minY) * (l.bottom - l.top);
+}
+
+function currentLabelPositions(list,frame,l){
+  if(!list.length) return {};
+  const ordered = [...list].sort((a,b)=>b.points[frame]-a.points[frame]);
+  const minGap = 8;
+  const topLimit = l.top + 2;
+  const bottomLimit = l.bottom - 2;
+  const rows = ordered.map(s => ({
+    name:s.name,
+    y:Math.max(topLimit,Math.min(bottomLimit,yFor(s.points[frame],l)))
+  }));
+  for(let i=1;i<rows.length;i++){
+    rows[i].y = Math.max(rows[i].y,rows[i-1].y + minGap);
+  }
+  const overflow = rows.length ? rows[rows.length-1].y - bottomLimit : 0;
+  if(overflow > 0){
+    for(const row of rows) row.y -= overflow;
+  }
+  for(let i=rows.length-2;i>=0;i--){
+    rows[i].y = Math.min(rows[i].y,rows[i+1].y - minGap);
+  }
+  const result = {};
+  for(const row of rows){
+    result[row.name] = Math.max(topLimit,Math.min(bottomLimit,row.y));
+  }
+  return result;
+}
+
+function roundedRect(x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
+}
+
+function drawWatermark(text,x,y,rot){
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.rotate(rot);
+  ctx.font = '16px "Microsoft YaHei", sans-serif';
+  ctx.fillStyle = 'rgba(180,180,180,.05)';
+  ctx.fillText(text,0,0);
+  ctx.restore();
+}
+
+function draw(){
+  if(!sectors.length){
+    sectors = generateSectors(currentDataRows); cachedYRange = null;
+    labelOrder = sectors.map(s => s.name);
+    labelY = buildLabelY(sectors);
+    for(const s of sectors) s.points = seriesFor(s);
+  }
+  const l = layout();
+  if(l.w <= 0 || l.h <= 0) return;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,l.w,l.h);
+
+  const grad = ctx.createLinearGradient(0,l.top,0,l.bottom);
+  grad.addColorStop(0,'rgba(245,138,129,.08)');
+  grad.addColorStop(.46,'rgba(20,20,20,.96)');
+  grad.addColorStop(1,'rgba(125,195,174,.08)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(l.left,l.top,l.right-l.left,l.bottom-l.top);
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(l.left,l.top,l.right-l.left,l.bottom-l.top);
+  ctx.clip();
+  drawWatermark('雪球研习社',l.left+80,l.top+100,-.45);
+  drawWatermark('雪球研习社',l.left+240,l.top+220,.42);
+  drawWatermark('雪球研习社',l.left+60,l.top+400,.45);
+  drawWatermark('雪球研习社',l.left+260,l.top+480,.45);
+  ctx.restore();
+
+  ctx.strokeStyle = '#2a2a2a';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([5,4]);
+  const ticks = generateYTicks(l);
+  for(const tick of ticks){
+    const y = yFor(tick,l);
+    ctx.beginPath();
+    ctx.moveTo(l.left,y);
+    ctx.lineTo(l.right,y);
+    ctx.stroke();
+  }
+  ctx.beginPath();
+  ctx.moveTo(l.left,l.top);
+  ctx.lineTo(l.left,l.bottom);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.strokeStyle = '#555';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(l.left,l.bottom);
+  ctx.lineTo(l.right,l.bottom);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(l.left,yFor(0,l));
+  ctx.lineTo(l.right,yFor(0,l));
+  ctx.strokeStyle = '#666';
+  ctx.lineWidth = 1.6;
+  ctx.stroke();
+
+  ctx.font = '13px Arial, sans-serif';
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#fff';
+  for(const tick of ticks){
+    ctx.fillText(tick + '亿',l.left - 8,yFor(tick,l));
+  }
+
+  const xTicks = [
+    {m:9 * 60 + 30,t:'09:30'},
+    {m:10 * 60 + 30,t:'10:30'},
+    {m:14 * 60,t:'14:00'},
+    {m:15 * 60,t:'15:00'}
+  ];
+  ctx.font = '12px Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  ctx.fillStyle = '#fff';
+  for(const tick of xTicks){
+    ctx.fillText(tick.t,xForMinutes(tick.m,l),l.bottom+8);
+  }
+
+  const frame = currentFrame;
+  for(const s of sectors){
+    ctx.strokeStyle = s.color;
+    ctx.lineWidth = 3.2;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    if(frame >= 0){
+      const morningEnd = Math.min(frame, 24);
+      ctx.beginPath();
+      for(let i=0;i<=morningEnd;i++){
+        const x = xFor(i,l);
+        const y = yFor(s.points[i],l);
+        if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+    if(frame >= 25){
+      ctx.beginPath();
+      for(let i=25;i<=frame;i++){
+        const x = xFor(i,l);
+        const y = yFor(s.points[i],l);
+        if(i===25) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+  }
+
+  if(frame >= 0){
+    // Distribute labels to 4 sides round-robin by Y position
+    const byY = [...sectors].sort((a,b)=>b.points[frame]-a.points[frame]);
+    const side = {}; // 'top','right','bottom','left'
+    const sides = ['right','left','top','bottom'];
+    byY.forEach((s,i)=>{ side[s.name] = sides[i % 4]; });
+
+    for(const name of labelOrder){
+      const s = sectors.find(item => item.name === name);
+      const currentValue = s.points[frame];
+      const endX = xFor(frame,l);
+      const endY = yFor(currentValue,l);
+      const dir = side[s.name];
+      const label = `${s.name}  ${currentValue >= 0 ? '+' : ''}${currentValue.toFixed(0)}`;
+      const font = '9px "Microsoft YaHei", Arial, sans-serif';
+      ctx.font = font;
+      const tw = ctx.measureText(label).width;
+      const boxW = tw + 8;
+      const boxH = 12;
+
+      let boxX, boxY, align, baseline;
+      if(dir === 'right'){
+        boxX = endX + 4;
+        boxY = endY - boxH / 2;
+        align = 'left';
+        baseline = 'middle';
+      }else if(dir === 'left'){
+        boxX = endX - boxW - 4;
+        boxY = endY - boxH / 2;
+        align = 'right';
+        baseline = 'middle';
+      }else if(dir === 'top'){
+        boxX = endX - boxW / 2;
+        boxY = endY - boxH - 6;
+        align = 'center';
+        baseline = 'bottom';
+      }else{ // bottom
+        boxX = endX - boxW / 2;
+        boxY = endY + 6;
+        align = 'center';
+        baseline = 'top';
+      }
+
+      ctx.fillStyle = s.color;
+      ctx.beginPath();
+      ctx.arc(endX,endY,3,0,Math.PI*2);
+      ctx.fill();
+
+      roundedRect(boxX,boxY,boxW,boxH,2);
+      ctx.fillStyle = 'rgba(10,10,10,.94)';
+      ctx.fill();
+      ctx.strokeStyle = s.color;
+      ctx.lineWidth = 1.3;
+      ctx.stroke();
+      ctx.fillStyle = s.color;
+      ctx.textAlign = align;
+      ctx.textBaseline = baseline;
+      let tx, ty;
+      if(dir === 'right'){ tx = boxX + 4; ty = boxY + boxH / 2; }
+      else if(dir === 'left'){ tx = boxX + boxW - 4; ty = boxY + boxH / 2; }
+      else if(dir === 'top'){ tx = boxX + boxW / 2; ty = boxY + boxH; }
+      else { tx = boxX + boxW / 2; ty = boxY; }
+      ctx.fillText(label, tx, ty + .5);
+    }
+  }
+
+}
+
+function setFrame(frame){
+  currentFrame = Math.max(0,Math.min(END_FRAME,frame));
+  draw();
+}
+
+function start(){
+  if(playing) return;
+  if(currentFrame >= END_FRAME) setFrame(0);
+  playing = true;
+  playIcon.textContent = '⏸';
+  tick();
+}
+
+function stop(){
+  playing = false;
+  clearTimeout(timer);
+  playIcon.textContent = '▶';
+}
+
+function tick(){
+  if(!playing) return;
+  setFrame(currentFrame + 1);
+  if(currentFrame >= END_FRAME){
+    stop();
+    return;
+  }
+  timer = setTimeout(tick,210);
+}
+
+playBtn.addEventListener('click',function(){
+  playing ? stop() : start();
+});
+window.addEventListener('resize',resize);
+requestAnimationFrame(function() {
+  resize();
+  applyDate(selectedDate).then(function() {
+    start();
+  });
+});
+</script>
+</body>
+</html>

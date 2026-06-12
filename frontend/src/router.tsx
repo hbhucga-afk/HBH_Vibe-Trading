@@ -28,6 +28,9 @@ const Gold = lazy(() =>
 const Futures = lazy(() =>
   import("@/pages/Futures").then((m) => ({ default: m.Futures })),
 );
+const SectorFundFlow = lazy(() =>
+  import("@/pages/SectorFundFlow").then((m) => ({ default: m.SectorFundFlow })),
+);
 
 function PageLoader() {
   return (
@@ -61,6 +64,7 @@ export const router = createBrowserRouter([
       { path: "/alpha-zoo/:alphaId", element: wrap(AlphaZoo) },
       { path: "/gold", element: wrap(Gold) },
       { path: "/futures", element: wrap(Futures) },
+      { path: "/fund-flow", element: wrap(SectorFundFlow) },
     ],
   },
 ]);

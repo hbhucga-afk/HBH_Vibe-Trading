@@ -12,11 +12,29 @@ Zero API key required.
 """
 
 import json
+import os as _os
 import sys
+from pathlib import Path as _Path
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import requests
 from mootdx.quotes import Quotes
+
+# Gold data loader (SGE local cache)
+_sys_path = list(sys.path)
+sys.path.insert(0, str(_Path(__file__).resolve().parent / "agent"))
+try:
+    from gold_data import load_sge_data, list_available_contracts, get_latest_price, download_sge_data, clear_cache
+    _HAS_GOLD_DATA = True
+except ImportError:
+    _HAS_GOLD_DATA = False
+    def load_sge_data(*a, **kw): return []
+    def list_available_contracts(): return []
+    def get_latest_price(*a, **kw): return None
+    def download_sge_data(*a, **kw): return {}
+    def clear_cache(): pass
+sys.path = _sys_path
 
 # mootdx TCP client factory — fresh client per request avoids stale connections
 def _get_mootdx():
@@ -538,6 +556,20 @@ def get_gold_price():
     etf_price = gold_etf.get("price")
     etf_change_pct = gold_etf.get("change_pct")
 
+    # SGE Au99.99 spot price from local cache (real gold contract data)
+    sge_price = None
+    sge_change_pct = None
+    sge_latest = get_latest_price("Au99.99")
+    if sge_latest:
+        sge_price = sge_latest.get("close") or sge_latest.get("price")
+        # Calculate change from previous bar if available
+        sge_bars = load_sge_data("Au99.99")
+        if len(sge_bars) >= 2:
+            prev = sge_bars[-2]
+            prev_close = prev.get("close", 0) or prev.get("price", 0)
+            if sge_price and prev_close and prev_close > 0:
+                sge_change_pct = round((sge_price - prev_close) / prev_close * 100, 2)
+
     return jsonify({
         "status": "ok",
         "spot": {
@@ -553,6 +585,13 @@ def get_gold_price():
             "price": etf_price,
             "change_pct": etf_change_pct,
             "unit": "CNY/份",
+        },
+        "sge_gold": {
+            "code": "Au99.99",
+            "name": "上海金交所 Au99.99",
+            "price": sge_price,
+            "change_pct": sge_change_pct,
+            "unit": "CNY/g",
         },
         "updated_at": gold_etf.get("servertime") or None,
     })
@@ -656,6 +695,97 @@ def gold_accumulation():
 
 
 # ---------------------------------------------------------------------------
+# SGE gold data endpoints (via local cache from 黄金历史数据.py scraper)
+# ---------------------------------------------------------------------------
+
+
+@app.route("/api/market/gold/sge")
+def get_gold_sge():
+    """Return available SGE gold contracts and their data summary."""
+    contracts = list_available_contracts()
+    gold_contracts = [c for c in contracts if c["code"].startswith("Au") or c["code"] in ("PGC30g", "iAu99.99")]
+    return jsonify({
+        "status": "ok",
+        "contracts": gold_contracts,
+        "data_path": str(_Path(__file__).resolve().parent / "data" / "sge"),
+    })
+
+
+@app.route("/api/market/gold/klines/au9999")
+def get_gold_klines_au9999():
+    """Return Au99.99 K-line data from local SGE cache."""
+    ktype = request.args.get("type", "daily")
+    try:
+        count = int(request.args.get("count", 200))
+    except (ValueError, TypeError):
+        count = 200
+
+    bars = load_sge_data("Au99.99")
+
+    # Filter by type (daily/weekly/monthly) — for now return daily as-is
+    # Weekly/monthly resampling can be added later
+    bars = bars[-count:] if len(bars) > count else bars
+
+    return jsonify({
+        "status": "ok",
+        "code": "Au99.99",
+        "name": "黄金9999 (SGE)",
+        "type": ktype,
+        "count": len(bars),
+        "bars": bars,
+        "source": "上海黄金交易所 (sge.com.cn)",
+    })
+
+
+@app.route("/api/market/gold/klines/<contract>")
+def get_gold_klines_contract(contract: str):
+    """Return K-line data for any SGE gold contract from local cache."""
+    ktype = request.args.get("type", "daily")
+    try:
+        count = int(request.args.get("count", 200))
+    except (ValueError, TypeError):
+        count = 200
+
+    if contract in ("au9999", "Au99.99"):
+        bars = load_sge_data("Au99.99")
+    elif contract in ("autd", "Au(T+D)"):
+        bars = load_sge_data("Au(T+D)")
+    else:
+        bars = load_sge_data(contract)
+
+    bars = bars[-count:] if len(bars) > count else bars
+
+    return jsonify({
+        "status": "ok",
+        "code": contract,
+        "type": ktype,
+        "count": len(bars),
+        "bars": bars,
+        "source": "上海黄金交易所 (sge.com.cn)",
+    })
+
+
+@app.route("/api/market/gold/refresh", methods=["POST"])
+def refresh_gold_data():
+    """Trigger a fresh download of today's SGE gold data."""
+    from datetime import datetime as _dt
+    today = _dt.now().strftime("%Y-%m-%d")
+    try:
+        result = download_sge_data(target_date=today)
+        clear_cache()
+        total = sum(result.values())
+        return jsonify({
+            "status": "ok",
+            "message": f"已更新 {today} 数据",
+            "date": today,
+            "contracts": len(result),
+            "total_bars": total,
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
+# ---------------------------------------------------------------------------
 # robot research endpoints
 # ---------------------------------------------------------------------------
 import os as _os
@@ -754,6 +884,12 @@ INDEX_FUTURES = {
 _FUTURES_HOLD_CACHE: dict[str, object] | None = None
 _FUTURES_HOLD_CACHE_TIME: float = 0.0
 _FUTURES_HOLD_CACHE_TTL = 600  # 10 minutes
+
+# CFFEX real-time quotes cache
+_CFFEX_QUOTES_CACHE: dict | None = None
+_CFFEX_QUOTES_CACHE_TIME: float = 0.0
+_CFFEX_QUOTES_CACHE_TTL = 300  # 5 minutes
+_CFFEX_DATA_DIR = _Path(__file__).resolve().parent / "data" / "cffex"
 
 # EastMoney CFFEX holding data API
 _EM_FUTURES_HOLD_URL = "https://datacenter.eastmoney.com/api/data/v1/get"
@@ -1017,5 +1153,154 @@ def get_futures_holdings():
     return jsonify({"status": "ok", "data": result})
 
 
+# ── CFFEX real-time quotes loader ──
+
+def _load_cffex_quotes() -> dict:
+    """Load the latest CFFEX real-time quotes from local JSON cache.
+
+    Reads from data/cffex/ and returns the most recent file's contents.
+    Falls back to an empty structure if no data file exists.
+    Only matches date-pattern files (YYYY-MM-DD.json), not ccpm or other files.
+    """
+    global _CFFEX_QUOTES_CACHE, _CFFEX_QUOTES_CACHE_TIME
+    now = _time.time()
+    if _CFFEX_QUOTES_CACHE is not None and (now - _CFFEX_QUOTES_CACHE_TIME) < _CFFEX_QUOTES_CACHE_TTL:
+        return _CFFEX_QUOTES_CACHE
+
+    if not _CFFEX_DATA_DIR.exists():
+        return {"status": "empty", "contracts": [], "date": "", "source": ""}
+
+    # Only match date-pattern files: YYYY-MM-DD.json (not ccpm_* etc.)
+    import re
+    date_pattern = re.compile(r"^\d{4}-\d{2}-\d{2}\.json$")
+    json_files = sorted(
+        [f for f in _CFFEX_DATA_DIR.glob("*.json") if date_pattern.match(f.name)],
+        reverse=True,
+    )
+    for jf in json_files:
+        try:
+            data = json.loads(jf.read_text(encoding="utf-8"))
+            if data.get("contracts"):
+                _CFFEX_QUOTES_CACHE = data
+                _CFFEX_QUOTES_CACHE_TIME = now
+                return data
+        except (json.JSONDecodeError, OSError):
+            continue
+
+    return {"status": "empty", "contracts": [], "date": "", "source": ""}
+
+
+@app.route("/api/market/futures/quotes")
+def get_futures_quotes():
+    """Return real-time CFFEX index futures price quotes.
+
+    Data is sourced from http://www.cffex.com.cn/cn/yshq.html
+    and cached locally in data/cffex/.
+
+    Returns:
+        {
+          "status": "ok",
+          "source": "中国金融期货交易所延时行情",
+          "sourceUrl": "http://www.cffex.com.cn/cn/yshq.html",
+          "date": "2026-06-12",
+          "contracts": [
+            {
+              "品种": "IF", "合约名称": "IF2609", "开盘价": 4650.0,
+              "最高价": 4690.0, "最低价": 4630.4, "最新价": 4671.8,
+              "涨跌": 93.8, "买价": 4671.0, "买量": 1,
+              "卖价": 4672.0, "卖量": 15, "成交量": 38386, "持仓量": 112317
+            }, ...
+          ],
+          "summary": { ... }
+        }
+    """
+    data = _load_cffex_quotes()
+    return jsonify({
+        "status": "ok",
+        "source": data.get("source", ""),
+        "sourceUrl": data.get("sourceUrl", ""),
+        "date": data.get("date", ""),
+        "contracts": data.get("contracts", []),
+        "summary": data.get("summary", {}),
+    })
+
+
+# ── CCFPM (成交持仓排名) endpoints ──
+
+_CCPM_CACHE: dict | None = None
+_CCPM_CACHE_TIME: float = 0.0
+_CCPM_CACHE_TTL = 600  # 10 minutes
+
+
+def _load_ccpm_data() -> dict:
+    """Load CCFPM data from local JSON cache for all 4 products.
+
+    Returns { "IF": {...}, "IC": {...}, "IM": {...}, "IH": {...} }
+    """
+    global _CCPM_CACHE, _CCPM_CACHE_TIME
+    now = _time.time()
+    if _CCPM_CACHE is not None and (now - _CCPM_CACHE_TIME) < _CCPM_CACHE_TTL:
+        return _CCPM_CACHE
+
+    products = ["IF", "IC", "IM", "IH"]
+    result: dict[str, dict] = {}
+
+    for p in products:
+        fpath = _CFFEX_DATA_DIR / f"ccpm_{p}_20260612.json"  # TODO: date-aware
+        if fpath.exists():
+            try:
+                result[p] = json.loads(fpath.read_text(encoding="utf-8"))
+            except (json.JSONDecodeError, OSError):
+                result[p] = {"contracts": {}, "product": p}
+        else:
+            result[p] = {"contracts": {}, "product": p}
+
+    _CCPM_CACHE = result
+    _CCPM_CACHE_TIME = now
+    return result
+
+
+@app.route("/api/market/futures/ccpm")
+def get_futures_ccpm():
+    """Return CFFEX top-20 member position rankings for all 4 index futures.
+
+    Data source: http://www.cffex.com.cn/cn/ccpm.html
+    Cached locally in data/cffex/ccpm_{IF,IC,IM,IH}_YYYYMMDD.json.
+
+    Returns:
+        {
+          "status": "ok",
+          "date": "2026-06-12",
+          "data": {
+            "IF": {
+              "product": "IF",
+              "productName": "沪深300股指期货",
+              "contracts": {
+                "IF2606": {
+                  "summary": {totalVolume, totalBuyPosition, totalSellPosition, netPosition},
+                  "volumeRankings": [{rank, shortName, volume, varVolume}, ...],
+                  "buyPositionRankings": [...],
+                  "sellPositionRankings": [...]
+                }, ...
+              }
+            }, ...
+          }
+        }
+    """
+    data = _load_ccpm_data()
+    # Extract date from first product
+    date = ""
+    for p in data.values():
+        date = p.get("date", "")
+        if date:
+            break
+
+    return jsonify({
+        "status": "ok",
+        "date": date,
+        "data": data,
+    })
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=False)

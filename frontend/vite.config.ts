@@ -44,6 +44,8 @@ export default defineConfig(({ mode }) => {
         "/runs": apiProxy,
         "/correlation": apiProxyWithHtmlFallback,
         "^/alpha(?:/|$)": apiProxy,
+        // fund-flow API (JSON + HTML view)
+        "^/api/fund-flow": apiProxy,
         // market-data microservice
         "/api/market": {
           target: "http://localhost:5001",

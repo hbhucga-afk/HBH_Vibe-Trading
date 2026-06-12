@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, Fragment } from "react";
 import { cn } from "@/lib/utils";
-import { api, type FuturesContractData, type BrokerHolding } from "@/lib/api";
+import { api, type FuturesContractData, type BrokerHolding, type FuturesQuotesResponse, type CcpmResponse } from "@/lib/api";
 import { echarts } from "@/lib/echarts";
 import { getChartTheme } from "@/lib/chart-theme";
 import { useDarkMode } from "@/hooks/useDarkMode";
@@ -476,11 +476,398 @@ function ContractPanel({ data }: { data: FuturesContractData }) {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Real-time price quotes table (CFFEX 延时行情)                      */
+/* ------------------------------------------------------------------ */
+
+function PriceQuotesTable({ quotes }: { quotes: FuturesQuotesResponse }) {
+  const contracts = Array.isArray(quotes.contracts) ? quotes.contracts : [];
+
+  const COLLAPSED_INFO: Record<string, { label: string; color: string }> = {
+    IF: { label: "IF", color: "text-blue-500" },
+    IC: { label: "IC", color: "text-emerald-500" },
+    IM: { label: "IM", color: "text-orange-500" },
+    IH: { label: "IH", color: "text-purple-500" },
+  };
+
+  // Group contracts by 品种
+  const grouped: Record<string, typeof contracts> = {};
+  for (const c of contracts) {
+    const p = c["品种"];
+    if (!grouped[p]) grouped[p] = [];
+    grouped[p].push(c);
+  }
+
+  const productCodes = quotes.summary?.["品种"] || Object.keys(grouped);
+
+  if (contracts.length === 0) {
+    return (
+      <div className="border rounded-xl bg-card p-4 text-center text-muted-foreground text-sm">
+        暂无实时行情数据
+      </div>
+    );
+  }
+
+  return (
+    <div className="border rounded-xl bg-card overflow-hidden">
+      <div className="border-b px-4 py-3 flex items-center gap-2">
+        <TrendingUp className="h-4 w-4 text-primary" />
+        <div>
+          <h3 className="text-sm font-semibold">实时行情</h3>
+          <p className="text-[11px] text-muted-foreground">
+            {quotes.source} · {quotes.date}
+          </p>
+        </div>
+      </div>
+
+      <div className="overflow-x-auto">
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="border-b bg-muted/30 text-muted-foreground">
+              <th className="text-left px-2 py-1.5 font-medium">品种</th>
+              <th className="text-left px-2 py-1.5 font-medium">合约</th>
+              <th className="text-right px-2 py-1.5 font-medium">开盘</th>
+              <th className="text-right px-2 py-1.5 font-medium">最高</th>
+              <th className="text-right px-2 py-1.5 font-medium">最低</th>
+              <th className="text-right px-2 py-1.5 font-medium">最新</th>
+              <th className="text-right px-2 py-1.5 font-medium">涨跌</th>
+              <th className="text-right px-2 py-1.5 font-medium">成交量</th>
+              <th className="text-right px-2 py-1.5 font-medium">持仓量</th>
+            </tr>
+          </thead>
+          <tbody>
+            {productCodes.map((product) => {
+              const rows = grouped[product] || [];
+              return rows.map((c, idx) => {
+                const isFirst = idx === 0;
+                const change = c["涨跌"];
+                const up = change > 0;
+                const down = change < 0;
+                const info = COLLAPSED_INFO[product];
+
+                return (
+                  <tr
+                    key={c["合约名称"]}
+                    className={cn(
+                      "border-b border-border/30 hover:bg-muted/20 transition-colors",
+                      isFirst && "border-t-2 border-t-border",
+                    )}
+                  >
+                    <td className="px-2 py-1.5">
+                      <span className={cn("font-bold", info?.color)}>{product}</span>
+                    </td>
+                    <td className="px-2 py-1.5 font-mono tabular-nums">{c["合约名称"]}</td>
+                    <td className="px-2 py-1.5 text-right tabular-nums text-muted-foreground">
+                      {c["开盘价"].toFixed(2)}
+                    </td>
+                    <td className="px-2 py-1.5 text-right tabular-nums text-muted-foreground">
+                      {c["最高价"].toFixed(2)}
+                    </td>
+                    <td className="px-2 py-1.5 text-right tabular-nums text-muted-foreground">
+                      {c["最低价"].toFixed(2)}
+                    </td>
+                    <td className={cn(
+                      "px-2 py-1.5 text-right tabular-nums font-bold",
+                      up && "text-danger",
+                      down && "text-success",
+                    )}>
+                      {c["最新价"].toFixed(2)}
+                    </td>
+                    <td className={cn(
+                      "px-2 py-1.5 text-right tabular-nums font-medium",
+                      up && "text-danger",
+                      down && "text-success",
+                    )}>
+                      {up ? "+" : ""}{change.toFixed(2)}
+                    </td>
+                    <td className="px-2 py-1.5 text-right tabular-nums text-muted-foreground">
+                      {c["成交量"].toLocaleString()}
+                    </td>
+                    <td className="px-2 py-1.5 text-right tabular-nums text-muted-foreground">
+                      {c["持仓量"].toLocaleString()}
+                    </td>
+                  </tr>
+                );
+              });
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="border-t px-4 py-2 text-[10px] text-muted-foreground">
+        涨跌 = 最新价 - 前结算价 · 数据来源：{quotes.sourceUrl}
+      </div>
+    </div>
+  );
+}
+
+
+/* ------------------------------------------------------------------ */
+/*  CCFPM Member Rankings Panel (成交持仓排名)                          */
+/* ------------------------------------------------------------------ */
+
+const CONTRACT_COLORS: Record<string, string> = {
+  IF2606: "border-l-blue-500", IF2607: "border-l-blue-400", IF2609: "border-l-blue-600", IF2612: "border-l-blue-300",
+  IC2606: "border-l-emerald-500", IC2607: "border-l-emerald-400", IC2609: "border-l-emerald-600", IC2612: "border-l-emerald-300",
+  IM2606: "border-l-orange-500", IM2607: "border-l-orange-400", IM2609: "border-l-orange-600", IM2612: "border-l-orange-300",
+  IH2606: "border-l-purple-500", IH2607: "border-l-purple-400", IH2609: "border-l-purple-600", IH2612: "border-l-purple-300",
+};
+
+function CcpmContractTable({ contract }: { contract: { instrumentId: string; summary: { totalVolume: number; totalBuyPosition: number; totalSellPosition: number; netPosition: number }; volumeRankings: { rank: number; shortName: string; volume: number; varVolume: number }[]; buyPositionRankings: { rank: number; shortName: string; volume: number; varVolume: number }[]; sellPositionRankings: { rank: number; shortName: string; volume: number; varVolume: number }[] } }) {
+  const maxRows = Math.max(contract.volumeRankings.length, contract.buyPositionRankings.length, contract.sellPositionRankings.length);
+  const rows = Array.from({ length: maxRows }, (_, i) => ({
+    vol: contract.volumeRankings[i] || null,
+    buy: contract.buyPositionRankings[i] || null,
+    sell: contract.sellPositionRankings[i] || null,
+  }));
+
+  const borderColor = CONTRACT_COLORS[contract.instrumentId] || "border-l-muted";
+  const s = contract.summary;
+  const netSign = s.netPosition > 0 ? "+" : "";
+
+  return (
+    <div className={cn("border rounded-lg bg-card overflow-hidden border-l-4", borderColor)}>
+      <div className="px-3 py-2 border-b bg-muted/20 flex items-center justify-between">
+        <span className="text-sm font-bold tabular-nums">{contract.instrumentId}</span>
+        <div className="flex gap-3 text-[10px] text-muted-foreground">
+          <span>成交量: {s.totalVolume.toLocaleString()}</span>
+          <span>多: {s.totalBuyPosition.toLocaleString()}</span>
+          <span>空: {s.totalSellPosition.toLocaleString()}</span>
+          <span className={cn("font-medium", s.netPosition > 0 ? "text-danger" : s.netPosition < 0 ? "text-success" : "")}>
+            净: {netSign}{s.netPosition.toLocaleString()}
+          </span>
+        </div>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-[11px]">
+          <thead>
+            <tr className="border-b bg-muted/20 text-muted-foreground">
+              <th className="w-8 px-1 py-1 text-center">#</th>
+              <th className="text-left px-1 py-1">会员简称</th>
+              <th className="text-right px-1 py-1">成交量</th>
+              <th className="text-right px-1 py-1">变化</th>
+              <th className="w-8 px-1 py-1 text-center">#</th>
+              <th className="text-left px-1 py-1">会员简称</th>
+              <th className="text-right px-1 py-1">持买单</th>
+              <th className="text-right px-1 py-1">变化</th>
+              <th className="w-8 px-1 py-1 text-center">#</th>
+              <th className="text-left px-1 py-1">会员简称</th>
+              <th className="text-right px-1 py-1">持卖单</th>
+              <th className="text-right px-1 py-1">变化</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.slice(0, 20).map((row, i) => (
+              <tr key={i} className="border-b border-border/20 hover:bg-muted/10">
+                <td className="px-1 py-0.5 text-center text-muted-foreground">{row.vol?.rank ?? ""}</td>
+                <td className="px-1 py-0.5 font-medium">{row.vol?.shortName ?? ""}</td>
+                <td className="px-1 py-0.5 text-right tabular-nums">{row.vol?.volume?.toLocaleString() ?? ""}</td>
+                <td className={cn("px-1 py-0.5 text-right tabular-nums", (row.vol?.varVolume ?? 0) > 0 ? "text-danger" : (row.vol?.varVolume ?? 0) < 0 ? "text-success" : "text-muted-foreground")}>
+                  {(row.vol?.varVolume ?? 0) > 0 ? "+" : ""}{row.vol?.varVolume?.toLocaleString() ?? ""}
+                </td>
+                <td className="px-1 py-0.5 text-center text-muted-foreground">{row.buy?.rank ?? ""}</td>
+                <td className="px-1 py-0.5 font-medium">{row.buy?.shortName ?? ""}</td>
+                <td className="px-1 py-0.5 text-right tabular-nums">{row.buy?.volume?.toLocaleString() ?? ""}</td>
+                <td className={cn("px-1 py-0.5 text-right tabular-nums", (row.buy?.varVolume ?? 0) > 0 ? "text-danger" : (row.buy?.varVolume ?? 0) < 0 ? "text-success" : "text-muted-foreground")}>
+                  {(row.buy?.varVolume ?? 0) > 0 ? "+" : ""}{row.buy?.varVolume?.toLocaleString() ?? ""}
+                </td>
+                <td className="px-1 py-0.5 text-center text-muted-foreground">{row.sell?.rank ?? ""}</td>
+                <td className="px-1 py-0.5 font-medium">{row.sell?.shortName ?? ""}</td>
+                <td className="px-1 py-0.5 text-right tabular-nums">{row.sell?.volume?.toLocaleString() ?? ""}</td>
+                <td className={cn("px-1 py-0.5 text-right tabular-nums", (row.sell?.varVolume ?? 0) > 0 ? "text-danger" : (row.sell?.varVolume ?? 0) < 0 ? "text-success" : "text-muted-foreground")}>
+                  {(row.sell?.varVolume ?? 0) > 0 ? "+" : ""}{row.sell?.varVolume?.toLocaleString() ?? ""}
+                </td>
+              </tr>
+            ))}
+            {/* 合计行 */}
+            {(() => {
+              const r20 = rows.slice(0, 20);
+              const tv = r20.reduce((s, r) => s + (r.vol?.volume ?? 0), 0);
+              const tvc = r20.reduce((s, r) => s + (r.vol?.varVolume ?? 0), 0);
+              const tb = r20.reduce((s, r) => s + (r.buy?.volume ?? 0), 0);
+              const tbc = r20.reduce((s, r) => s + (r.buy?.varVolume ?? 0), 0);
+              const ts = r20.reduce((s, r) => s + (r.sell?.volume ?? 0), 0);
+              const tsc = r20.reduce((s, r) => s + (r.sell?.varVolume ?? 0), 0);
+              return (
+                <tr className="border-t-2 border-border bg-muted/30 font-bold">
+                  <td className="px-1 py-1 text-center" colSpan={2}>合计</td>
+                  <td className="px-1 py-1 text-right tabular-nums">{tv.toLocaleString()}</td>
+                  <td className={cn("px-1 py-1 text-right tabular-nums", tvc > 0 ? "text-danger" : tvc < 0 ? "text-success" : "")}>
+                    {tvc > 0 ? "+" : ""}{tvc.toLocaleString()}
+                  </td>
+                  <td className="px-1 py-1 text-center" colSpan={2}>合计</td>
+                  <td className="px-1 py-1 text-right tabular-nums">{tb.toLocaleString()}</td>
+                  <td className={cn("px-1 py-1 text-right tabular-nums", tbc > 0 ? "text-danger" : tbc < 0 ? "text-success" : "")}>
+                    {tbc > 0 ? "+" : ""}{tbc.toLocaleString()}
+                  </td>
+                  <td className="px-1 py-1 text-center" colSpan={2}>合计</td>
+                  <td className="px-1 py-1 text-right tabular-nums">{ts.toLocaleString()}</td>
+                  <td className={cn("px-1 py-1 text-right tabular-nums", tsc > 0 ? "text-danger" : tsc < 0 ? "text-success" : "")}>
+                    {tsc > 0 ? "+" : ""}{tsc.toLocaleString()}
+                  </td>
+                </tr>
+              );
+            })()}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function CcpmPanel({ ccpm, activeCode }: { ccpm: CcpmResponse; activeCode: string }) {
+  const product = ccpm.data[activeCode];
+  if (!product || !product.contracts) {
+    return (
+      <div className="border rounded-xl bg-card p-4 text-center text-muted-foreground text-sm">
+        暂无 {activeCode} 成交持仓排名数据
+      </div>
+    );
+  }
+
+  const contractIds = Object.keys(product.contracts).sort();
+
+  // Use IM2606 (front-month) institutions as the base list
+  const mainContract = product.contracts[contractIds[0]];
+  const instList = (mainContract?.buyPositionRankings || []).map(r => {
+    const name = r.shortName;
+    let buy = 0, sell = 0;
+    const byContract: Record<string, { buy: number; sell: number }> = {};
+    for (const cid of contractIds) {
+      const c = product.contracts[cid];
+      const b = c.buyPositionRankings.find(x => x.shortName === name);
+      const s = c.sellPositionRankings.find(x => x.shortName === name);
+      byContract[cid] = { buy: b?.volume ?? 0, sell: s?.volume ?? 0 };
+      buy += b?.volume ?? 0;
+      sell += s?.volume ?? 0;
+    }
+    return { name, buy, sell, byContract };
+  });
+  const instTop20 = instList.slice(0, 20);
+  const instTotal = {
+    buy: contractIds.reduce((s, cid) => s + product.contracts[cid].summary.totalBuyPosition, 0),
+    sell: contractIds.reduce((s, cid) => s + product.contracts[cid].summary.totalSellPosition, 0),
+  };
+  const netTotal = instTotal.buy - instTotal.sell;
+
+  return (
+    <div className="border rounded-xl bg-card overflow-hidden">
+      <div className="border-b px-4 py-3 flex items-center gap-2">
+        <BarChart3 className="h-4 w-4 text-primary" />
+        <div>
+          <h3 className="text-sm font-semibold">成交持仓排名 · {product.productName}</h3>
+          <p className="text-[11px] text-muted-foreground">
+            {product.source} · {product.date} · 前20名
+          </p>
+        </div>
+      </div>
+      <div className="p-3 space-y-3">
+        {/* 四大合约跨期汇总 */}
+        <div className="border rounded-lg bg-card overflow-hidden border-l-4 border-l-primary">
+          <div className="px-3 py-2 border-b bg-muted/20">
+            <span className="text-sm font-bold">机构净持仓汇总（分合约）</span>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-[11px]">
+              <thead>
+                <tr className="border-b bg-muted/20 text-muted-foreground">
+                  <th className="w-8 px-1 py-1 text-center">#</th>
+                  <th className="text-left px-1 py-1">机构</th>
+                  {contractIds.map(cid => (
+                    <th key={cid} className="text-right px-1 py-1" colSpan={3}>{cid}</th>
+                  ))}
+                  <th className="text-right px-1 py-1" colSpan={3}>合计</th>
+                </tr>
+                <tr className="border-b bg-muted/20 text-muted-foreground text-[10px]">
+                  <th></th><th></th>
+                  {contractIds.map(cid => (
+                    <Fragment key={cid}>
+                      <th className="text-right px-1 py-0.5 text-danger/70">多</th>
+                      <th className="text-right px-1 py-0.5 text-success/70">空</th>
+                      <th className="text-right px-1 py-0.5">净</th>
+                    </Fragment>
+                  ))}
+                  <th className="text-right px-1 py-0.5 text-danger/70">多</th>
+                  <th className="text-right px-1 py-0.5 text-success/70">空</th>
+                  <th className="text-right px-1 py-0.5">净</th>
+                </tr>
+              </thead>
+              <tbody>
+                {instTop20.map((r, i) => {
+                  const net = r.buy - r.sell;
+                  return (
+                    <tr key={r.name} className="border-b border-border/20 hover:bg-muted/10">
+                      <td className="px-1 py-0.5 text-center text-muted-foreground">{i + 1}</td>
+                      <td className="px-1 py-0.5 font-medium whitespace-nowrap">{r.name}</td>
+                      {contractIds.map(cid => {
+                        const bc = r.byContract[cid];
+                        const netC = bc.buy - bc.sell;
+                        return (
+                          <Fragment key={cid}>
+                            <td className="px-1 py-0.5 text-right tabular-nums text-danger/80">{bc.buy > 0 ? bc.buy.toLocaleString() : "-"}</td>
+                            <td className="px-1 py-0.5 text-right tabular-nums text-success/80">{bc.sell > 0 ? bc.sell.toLocaleString() : "-"}</td>
+                            <td className={cn("px-1 py-0.5 text-right tabular-nums", netC > 0 ? "text-danger" : netC < 0 ? "text-success" : "text-muted-foreground")}>
+                              {netC > 0 ? "+" : ""}{netC.toLocaleString()}
+                            </td>
+                          </Fragment>
+                        );
+                      })}
+                      <td className="px-1 py-0.5 text-right tabular-nums font-medium text-danger">{r.buy.toLocaleString()}</td>
+                      <td className="px-1 py-0.5 text-right tabular-nums font-medium text-success">{r.sell.toLocaleString()}</td>
+                      <td className={cn("px-1 py-0.5 text-right tabular-nums font-bold", net > 0 ? "text-danger" : net < 0 ? "text-success" : "")}>
+                        {net > 0 ? "+" : ""}{net.toLocaleString()}
+                      </td>
+                    </tr>
+                  );
+                })}
+                <tr className="border-t-2 border-border bg-muted/30 font-bold">
+                  <td className="px-1 py-1 text-center" colSpan={2}>合计</td>
+                  {contractIds.map(cid => {
+                    const c = product.contracts[cid];
+                    const tb = c.summary.totalBuyPosition;
+                    const ts = c.summary.totalSellPosition;
+                    const tn = c.summary.netPosition;
+                    return (
+                      <Fragment key={cid}>
+                        <td className="px-1 py-1 text-right tabular-nums text-danger">{tb.toLocaleString()}</td>
+                        <td className="px-1 py-1 text-right tabular-nums text-success">{ts.toLocaleString()}</td>
+                        <td className={cn("px-1 py-1 text-right tabular-nums", tn > 0 ? "text-danger" : tn < 0 ? "text-success" : "")}>
+                          {tn > 0 ? "+" : ""}{tn.toLocaleString()}
+                        </td>
+                      </Fragment>
+                    );
+                  })}
+                  <td className="px-1 py-1 text-right tabular-nums text-danger">{instTotal.buy.toLocaleString()}</td>
+                  <td className="px-1 py-1 text-right tabular-nums text-success">{instTotal.sell.toLocaleString()}</td>
+                  <td className={cn("px-1 py-1 text-right tabular-nums", netTotal > 0 ? "text-danger" : netTotal < 0 ? "text-success" : "")}>
+                    {netTotal > 0 ? "+" : ""}{netTotal.toLocaleString()}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* 各合约明细 */}
+        {contractIds.map(id => (
+          <CcpmContractTable key={id} contract={product.contracts[id]} />
+        ))}
+      </div>
+      <div className="border-t px-4 py-2 text-[10px] text-muted-foreground">
+        成交量、持仓量：手（按单边计算） · 数据来源：{product.sourceUrl}
+      </div>
+    </div>
+  );
+}
+
+
+/* ------------------------------------------------------------------ */
 /*  Futures page                                                       */
 /* ------------------------------------------------------------------ */
 
 export function Futures() {
   const [data, setData] = useState<Record<string, FuturesContractData> | null>(null);
+  const [quotes, setQuotes] = useState<FuturesQuotesResponse | null>(null);
+  const [ccpm, setCcpm] = useState<CcpmResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeCode, setActiveCode] = useState<string>("IF");
 
@@ -490,6 +877,18 @@ export function Futures() {
       const res = await api.fetchFuturesHoldings();
       if (res.status === "ok") {
         setData(res.data);
+      }
+    } catch { /* ignore */ }
+    try {
+      const q = await api.fetchFuturesQuotes();
+      if (q.status === "ok") {
+        setQuotes(q);
+      }
+    } catch { /* ignore */ }
+    try {
+      const c = await api.fetchFuturesCcpm();
+      if (c.status === "ok") {
+        setCcpm(c);
       }
     } catch { /* ignore */ }
     setLoading(false);
@@ -559,6 +958,12 @@ export function Futures() {
           </div>
         ) : data ? (
           <>
+            {/* Real-time price quotes table */}
+            {quotes && <PriceQuotesTable quotes={quotes} />}
+
+            {/* CCFPM member position rankings */}
+            {ccpm && <CcpmPanel ccpm={ccpm} activeCode={activeCode} />}
+
             {/* All-contracts summary */}
             <div className="border rounded-xl bg-card p-4">
               <div className="flex items-center gap-1.5 mb-3">

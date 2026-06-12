@@ -1,0 +1,67 @@
+[
+  {
+    "time": "2025-03-06",
+    "open": 517.0,
+    "high": 517.0,
+    "low": 516.95,
+    "close": 516.95,
+    "volume": 0.4,
+    "amount": 206790.0,
+    "change": 46.95,
+    "pct_change": 9.99,
+    "code": "Au(T+N1)",
+    "source": "sge_web"
+  },
+  {
+    "time": "2025-03-10",
+    "open": 568.6,
+    "high": 568.6,
+    "low": 568.6,
+    "close": 568.6,
+    "volume": 0.2,
+    "amount": 113720.0,
+    "change": 51.65,
+    "pct_change": 9.99,
+    "code": "Au(T+N1)",
+    "source": "sge_web"
+  },
+  {
+    "time": "2025-09-09",
+    "open": 568.6,
+    "high": 568.6,
+    "low": 568.6,
+    "close": 568.6,
+    "volume": 0.2,
+    "amount": 113720.0,
+    "change": 0.0,
+    "pct_change": 0.0,
+    "code": "Au(T+N1)",
+    "source": "sge_web"
+  },
+  {
+    "time": "2026-05-28",
+    "open": 962.0,
+    "high": 962.0,
+    "low": 962.0,
+    "close": 962.0,
+    "volume": 0.2,
+    "amount": 192400.0,
+    "change": -19.0,
+    "pct_change": -1.94,
+    "code": "Au(T+N1)",
+    "source": "sge_web"
+  },
+  {
+    "time": "2026-06-08",
+    "open": 1096.7,
+    "high": 1096.7,
+    "low": 1096.7,
+    "close": 1096.7,
+    "volume": 0.2,
+    "amount": 219340.0,
+    "change": 134.7,
+    "pct_change": 14.0,
+    "code": "Au(T+N1)",
+    "source": "sge_web"
+  }
+]

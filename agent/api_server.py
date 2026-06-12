@@ -28,9 +28,6 @@ from pydantic import BaseModel, Field
 from fastapi.middleware.cors import CORSMiddleware
 from rich.console import Console
 
-from src.goal.context import default_goal_criteria
-from src.ui_services import build_run_analysis, load_run_context
-
 # UTF-8 on Windows
 import sys as _sys
 for _s in ("stdout", "stderr"):
@@ -572,10 +569,42 @@ async def _spa_html_deep_link_fallback(request: Request, call_next):
 
 @app.on_event("startup")
 async def _run_startup_preflight() -> None:
-    """Run preflight checks on server startup."""
-    from src.preflight import run_preflight
+    """Run preflight checks and start daily fund-flow refresh on startup."""
+    import threading
 
-    run_preflight(console)
+    def _preflight():
+        from src.preflight import run_preflight
+        run_preflight(console)
+
+    threading.Thread(target=_preflight, daemon=True).start()
+    threading.Thread(target=_daily_fund_flow_refresh, daemon=True).start()
+
+
+def _daily_fund_flow_refresh() -> None:
+    """Background thread: refresh fund-flow data at startup and daily at 18:00."""
+    from datetime import datetime, timedelta
+
+    REFRESH_HOUR = 15
+
+    while True:
+        try:
+            from eastmoney_fund_flow import refresh_fund_flow
+            logger.info("Daily fund-flow refresh: fetching...")
+            ok = refresh_fund_flow()
+            if ok:
+                logger.info("Daily fund-flow refresh: success")
+            else:
+                logger.warning("Daily fund-flow refresh: API returned no data")
+        except Exception:
+            logger.exception("Daily fund-flow refresh failed")
+
+        now = datetime.now()
+        next_run = now.replace(hour=REFRESH_HOUR, minute=0, second=0, microsecond=0)
+        if now >= next_run:
+            next_run += timedelta(days=1)
+        wait_seconds = (next_run - now).total_seconds()
+        logger.info("Next fund-flow refresh at %s (in %.1f min)", next_run, wait_seconds / 60)
+        time.sleep(wait_seconds)
 
 
 # ============================================================================
@@ -1027,6 +1056,8 @@ def _load_csv_to_dict(path: Path, limit: Optional[int] = None) -> List[Dict[str,
 
 def _build_response_from_run_dir(run_dir: Path, elapsed: float, *, include_analysis: bool = False) -> RunResponse:
     """Build a run response from a persisted run directory."""
+    from src.ui_services import build_run_analysis
+
     run_id = run_dir.name
 
     response = RunResponse(
@@ -1245,6 +1276,8 @@ async def get_run_result(run_id: str):
 @app.get("/runs", response_model=List[RunInfo], dependencies=[Depends(require_auth)])
 async def list_runs(limit: int = 20):
     """List recent runs with summary fields."""
+    from src.ui_services import load_run_context
+
     limit = min(max(1, limit), 100)
     runs_dir = RUNS_DIR
 
@@ -1663,6 +1696,7 @@ async def create_session_goal(session_id: str, req: CreateGoalRequest):
     _validate_path_param(session_id, "session_id")
     svc, _session = _get_existing_session_or_404(session_id)
     from src.goal import RiskTier
+    from src.goal.context import default_goal_criteria
 
     criteria = [item.strip() for item in req.criteria if item.strip()]
     if not criteria:
@@ -3062,7 +3096,10 @@ async def stop_runner_endpoint(payload: LiveRunnerControlRequest):
 # ============================================================================
 
 from src.api.alpha_routes import register_alpha_routes  # noqa: E402
+from src.api.fund_flow_routes import register_fund_flow_routes  # noqa: E402
+
 register_alpha_routes(app)
+register_fund_flow_routes(app)
 
 
 # ============================================================================

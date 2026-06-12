@@ -24,7 +24,6 @@ import {
   Globe,
   Scale,
   BarChart4,
-  LineChart,
   Calendar,
   Info,
 } from "lucide-react";
@@ -496,12 +495,14 @@ function GoldAccumulationPanel() {
 
 export function Gold() {
   const [spotPrice, setSpotPrice] = useState<{ price: number | null; changePct: number | null }>({ price: null, changePct: null });
+  const [sgePrice, setSgePrice] = useState<{ price: number | null; changePct: number | null }>({ price: null, changePct: null });
   const [klines, setKlines] = useState<PriceBar[]>([]);
+  const [sgeKlines, setSgeKlines] = useState<PriceBar[]>([]);
   const [intraday, setIntraday] = useState<PriceBar[]>([]);
   const [news, setNews] = useState<GoldNewsItem[]>([]);
   const [narratives, setNarratives] = useState<GoldNarrativeModule[]>([]);
   const [loading, setLoading] = useState(true);
-  const [klineType, setKlineType] = useState<"daily" | "weekly" | "monthly">("daily");
+  const [sgeContract, setSgeContract] = useState("Au99.99");
   const [expandedNarrative, setExpandedNarrative] = useState<string | null>(null);
   const [showNarratives, setShowNarratives] = useState(false);
   const [showAccumulation, setShowAccumulation] = useState(false);
@@ -509,24 +510,30 @@ export function Gold() {
   const fetchAll = useCallback(async () => {
     setLoading(true);
     try {
-      const [priceRes, klineRes, intradayRes, newsRes, narrativeRes] = await Promise.all([
+      const [priceRes, klineRes, intradayRes, newsRes, narrativeRes, sgeKlineRes] = await Promise.all([
         api.fetchGoldPrice(),
-        api.fetchGoldKlines(klineType, 200),
+        api.fetchGoldKlines("daily", 200),
         api.fetchGoldIntraday(),
         api.fetchGoldNews(),
         api.fetchGoldNarrative(),
+        api.fetchGoldKlinesAu9999("daily", 200),
       ]);
       setSpotPrice({
         price: priceRes.spot.price,
         changePct: priceRes.spot.change_pct,
       });
+      setSgePrice({
+        price: priceRes.sge_gold?.price ?? null,
+        changePct: priceRes.sge_gold?.change_pct ?? null,
+      });
       setKlines(klineRes.bars ?? []);
+      setSgeKlines(sgeKlineRes.bars ?? []);
       setIntraday(intradayRes.bars ?? []);
       setNews(newsRes.news ?? []);
       setNarratives(narrativeRes.modules ?? []);
     } catch { /* ignore */ }
     setLoading(false);
-  }, [klineType]);
+  }, []);
 
   useEffect(() => { fetchAll(); }, [fetchAll]);
 
@@ -540,17 +547,33 @@ export function Gold() {
             黄金
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            伦敦金 · 沪金期货 · 实时行情 &amp; 投资研究
+            伦敦金 · SGE现货 · 沪金期货 · 实时行情 &amp; 投资研究
           </p>
         </div>
-        <button
-          onClick={fetchAll}
-          disabled={loading}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border bg-card hover:bg-muted transition-colors text-sm font-medium disabled:opacity-50"
-        >
-          <RefreshCw className={cn("h-4 w-4", loading && "animate-spin")} />
-          刷新
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={async () => {
+              setLoading(true);
+              try {
+                await api.refreshGoldData();
+              } catch { /* ignore */ }
+              await fetchAll();
+            }}
+            disabled={loading}
+            className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/20 transition-colors text-sm font-medium disabled:opacity-50"
+            title="从上海黄金交易所拉取今日最新数据"
+          >
+            <RefreshCw className={cn("h-4 w-4", loading && "animate-spin")} />
+            更新SGE数据
+          </button>
+          <button
+            onClick={fetchAll}
+            disabled={loading}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border bg-card hover:bg-muted transition-colors text-sm font-medium disabled:opacity-50"
+          >
+            刷新页面
+          </button>
+        </div>
       </div>
 
       {loading && klines.length === 0 ? (
@@ -573,41 +596,54 @@ export function Gold() {
               accent
             />
             <GoldPriceCard
-              label="沪金主连"
+              label="沪金主连 (ETF)"
               price={klines.length > 0 ? klines[klines.length - 1].close : null}
               changePct={klines.length > 2 ? ((klines[klines.length - 1].close - klines[klines.length - 2].close) / klines[klines.length - 2].close * 100) : null}
+              unit="CNY/份"
+            />
+            <GoldPriceCard
+              label={`SGE ${sgeContract}`}
+              price={sgePrice.price}
+              changePct={sgePrice.changePct}
               unit="CNY/g"
+              accent
             />
             <div className="border rounded-xl p-5 bg-card min-w-[140px] flex-1 flex flex-col justify-center items-center gap-1">
               <Calendar className="h-5 w-5 text-muted-foreground" />
               <p className="text-[10px] text-muted-foreground uppercase">数据来源</p>
-              <p className="text-xs font-medium">腾讯行情 / mootdx</p>
+              <p className="text-xs font-medium">腾讯 / mootdx / SGE</p>
             </div>
           </div>
 
-          {/* K-line chart */}
+          {/* SGE Gold K-line chart */}
           <div className="border rounded-xl bg-card p-4">
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-sm font-semibold flex items-center gap-1.5">
-                <LineChart className="h-4 w-4 text-amber-500" />
-                沪金 K线图
+                <CircleDollarSign className="h-4 w-4 text-amber-500" />
+                SGE {sgeContract} K线图
               </h2>
-              <div className="flex gap-1">
-                {(["daily", "weekly", "monthly"] as const).map((t) => (
-                  <button
-                    key={t}
-                    onClick={() => setKlineType(t)}
-                    className={cn(
-                      "px-2 py-0.5 rounded text-[10px] font-mono transition-colors",
-                      klineType === t ? "bg-amber-500/15 text-amber-600 font-medium" : "text-muted-foreground/50 hover:text-muted-foreground",
-                    )}
-                  >
-                    {t === "daily" ? "日线" : t === "weekly" ? "周线" : "月线"}
-                  </button>
-                ))}
+              <div className="flex items-center gap-2">
+                <select
+                  value={sgeContract}
+                  onChange={(e) => setSgeContract(e.target.value)}
+                  className="px-2 py-0.5 rounded text-[10px] font-mono bg-background border text-muted-foreground"
+                >
+                  <option value="Au99.99">Au99.99 黄金9999</option>
+                  <option value="Au(T+D)">Au(T+D) 黄金延期</option>
+                  <option value="Au99.95">Au99.95 黄金9995</option>
+                </select>
+                <span className="text-[10px] text-muted-foreground/60 bg-amber-500/10 px-2 py-0.5 rounded">
+                  {sgeKlines.length > 0 ? `${sgeKlines.length} 条` : "无数据"}
+                </span>
               </div>
             </div>
-            <CandlestickChart data={klines} height={400} />
+            {sgeKlines.length > 0 ? (
+              <CandlestickChart data={sgeKlines} height={400} />
+            ) : (
+              <div className="flex items-center justify-center h-[200px] text-sm text-muted-foreground">
+                暂无 SGE 数据，请先运行 <code className="bg-muted px-1 py-0.5 rounded">python -m agent.gold_data --download</code> 下载数据
+              </div>
+            )}
           </div>
 
           {/* Intraday line chart */}

@@ -1,0 +1,67 @@
+[
+  {
+    "time": "2025-03-07",
+    "open": 380.0,
+    "high": 380.0,
+    "low": 380.0,
+    "close": 380.0,
+    "volume": 0.6,
+    "amount": 228000.0,
+    "change": 36.45,
+    "pct_change": 10.61,
+    "code": "iAu100g",
+    "source": "sge_web"
+  },
+  {
+    "time": "2025-05-28",
+    "open": 760.0,
+    "high": 762.0,
+    "low": 759.0,
+    "close": 761.35,
+    "volume": 6.6,
+    "amount": 5020000.0,
+    "change": 381.35,
+    "pct_change": 100.36,
+    "code": "iAu100g",
+    "source": "sge_web"
+  },
+  {
+    "time": "2025-05-29",
+    "open": 759.0,
+    "high": 759.0,
+    "low": 755.0,
+    "close": 757.66,
+    "volume": 0.6,
+    "amount": 454600.0,
+    "change": -3.69,
+    "pct_change": -0.48,
+    "code": "iAu100g",
+    "source": "sge_web"
+  },
+  {
+    "time": "2025-05-30",
+    "open": 758.0,
+    "high": 758.0,
+    "low": 757.0,
+    "close": 757.81,
+    "volume": 2.2,
+    "amount": 1667200.0,
+    "change": 0.15,
+    "pct_change": 0.02,
+    "code": "iAu100g",
+    "source": "sge_web"
+  },
+  {
+    "time": "2025-06-04",
+    "open": 531.0,
+    "high": 782.0,
+    "low": 531.0,
+    "close": 679.0,
+    "volume": 1.0,
+    "amount": 679000.0,
+    "change": -78.81,
+    "pct_change": -10.4,
+    "code": "iAu100g",
+    "source": "sge_web"
+  }
+]

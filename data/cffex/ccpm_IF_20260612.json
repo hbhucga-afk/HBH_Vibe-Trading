@@ -1,0 +1,2233 @@
+{
+  "source": "中国金融期货交易所成交持仓排名",
+  "sourceUrl": "http://www.cffex.com.cn/cn/ccpm.html",
+  "product": "IF",
+  "productName": "沪深300股指期货",
+  "date": "2026-06-12",
+  "contracts": {
+    "IF2606": {
+      "instrumentId": "IF2606",
+      "tradingDay": "20260612",
+      "summary": {
+        "totalVolume": 121057,
+        "totalBuyPosition": 71728,
+        "totalSellPosition": 77305,
+        "netPosition": -5577
+      },
+      "volumeRankings": [
+        {
+          "rank": 1,
+          "shortName": "中信期货(代客)",
+          "volume": 35541,
+          "varVolume": 8401,
+          "partyId": "0018",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 2,
+          "shortName": "国泰君安(代客)",
+          "volume": 22395,
+          "varVolume": -70,
+          "partyId": "0001",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 3,
+          "shortName": "东证期货(代客)",
+          "volume": 9279,
+          "varVolume": 865,
+          "partyId": "0156",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 4,
+          "shortName": "海通期货(代客)",
+          "volume": 8726,
+          "varVolume": 137,
+          "partyId": "0133",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 5,
+          "shortName": "国信期货(代客)",
+          "volume": 5281,
+          "varVolume": -430,
+          "partyId": "0113",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 6,
+          "shortName": "广发期货(代客)",
+          "volume": 4094,
+          "varVolume": 720,
+          "partyId": "0016",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 7,
+          "shortName": "华闻期货(代客)",
+          "volume": 3891,
+          "varVolume": 76,
+          "partyId": "0125",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 8,
+          "shortName": "光大期货(代客)",
+          "volume": 3769,
+          "varVolume": 741,
+          "partyId": "0007",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 9,
+          "shortName": "中泰期货(代客)",
+          "volume": 3762,
+          "varVolume": -219,
+          "partyId": "0006",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 10,
+          "shortName": "华泰期货(代客)",
+          "volume": 3760,
+          "varVolume": 568,
+          "partyId": "0011",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 11,
+          "shortName": "银河期货(代客)",
+          "volume": 3278,
+          "varVolume": -311,
+          "partyId": "0109",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 12,
+          "shortName": "中信建投(代客)",
+          "volume": 2708,
+          "varVolume": 87,
+          "partyId": "0115",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 13,
+          "shortName": "国投期货(代客)",
+          "volume": 2570,
+          "varVolume": 616,
+          "partyId": "0122",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 14,
+          "shortName": "永安期货(代客)",
+          "volume": 2302,
+          "varVolume": 1004,
+          "partyId": "0003",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 15,
+          "shortName": "招商期货(代客)",
+          "volume": 1745,
+          "varVolume": 320,
+          "partyId": "0136",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 16,
+          "shortName": "浙商期货(代客)",
+          "volume": 1639,
+          "varVolume": 807,
+          "partyId": "0009",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 17,
+          "shortName": "兴证期货(代客)",
+          "volume": 1635,
+          "varVolume": -110,
+          "partyId": "0102",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 18,
+          "shortName": "东海期货(代客)",
+          "volume": 1577,
+          "varVolume": 695,
+          "partyId": "0008",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 19,
+          "shortName": "申银万国(代客)",
+          "volume": 1575,
+          "varVolume": -185,
+          "partyId": "0131",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 20,
+          "shortName": "瑞达期货(代客)",
+          "volume": 1530,
+          "varVolume": -24,
+          "partyId": "0170",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        }
+      ],
+      "buyPositionRankings": [
+        {
+          "rank": 1,
+          "shortName": "中信期货(代客)",
+          "volume": 14003,
+          "varVolume": -1098,
+          "partyId": "0018",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 2,
+          "shortName": "国泰君安(代客)",
+          "volume": 13414,
+          "varVolume": -237,
+          "partyId": "0001",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 3,
+          "shortName": "东证期货(代客)",
+          "volume": 5600,
+          "varVolume": 206,
+          "partyId": "0156",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 4,
+          "shortName": "华泰期货(代客)",
+          "volume": 4385,
+          "varVolume": 198,
+          "partyId": "0011",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 5,
+          "shortName": "银河期货(代客)",
+          "volume": 3851,
+          "varVolume": -29,
+          "partyId": "0109",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 6,
+          "shortName": "广发期货(代客)",
+          "volume": 3668,
+          "varVolume": 109,
+          "partyId": "0016",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 7,
+          "shortName": "海通期货(代客)",
+          "volume": 3634,
+          "varVolume": -101,
+          "partyId": "0133",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 8,
+          "shortName": "永安期货(代客)",
+          "volume": 2793,
+          "varVolume": -389,
+          "partyId": "0003",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 9,
+          "shortName": "中信建投(代客)",
+          "volume": 2432,
+          "varVolume": -72,
+          "partyId": "0115",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 10,
+          "shortName": "光大期货(代客)",
+          "volume": 2146,
+          "varVolume": -1199,
+          "partyId": "0007",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 11,
+          "shortName": "中泰期货(代客)",
+          "volume": 2137,
+          "varVolume": 200,
+          "partyId": "0006",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 12,
+          "shortName": "南华期货(代客)",
+          "volume": 2065,
+          "varVolume": -102,
+          "partyId": "0002",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 13,
+          "shortName": "国信期货(代客)",
+          "volume": 1882,
+          "varVolume": 107,
+          "partyId": "0113",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 14,
+          "shortName": "国投期货(代客)",
+          "volume": 1780,
+          "varVolume": -593,
+          "partyId": "0122",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 15,
+          "shortName": "兴证期货(代客)",
+          "volume": 1616,
+          "varVolume": -60,
+          "partyId": "0102",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 16,
+          "shortName": "浙商期货(代客)",
+          "volume": 1511,
+          "varVolume": -125,
+          "partyId": "0009",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 17,
+          "shortName": "招商期货(代客)",
+          "volume": 1413,
+          "varVolume": -97,
+          "partyId": "0136",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 18,
+          "shortName": "华闻期货(代客)",
+          "volume": 1302,
+          "varVolume": -100,
+          "partyId": "0125",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 19,
+          "shortName": "中粮期货(代客)",
+          "volume": 1101,
+          "varVolume": 1,
+          "partyId": "0010",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 20,
+          "shortName": "申银万国(代客)",
+          "volume": 995,
+          "varVolume": -310,
+          "partyId": "0131",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        }
+      ],
+      "sellPositionRankings": [
+        {
+          "rank": 1,
+          "shortName": "中信期货(代客)",
+          "volume": 15311,
+          "varVolume": -3013,
+          "partyId": "0018",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 2,
+          "shortName": "国泰君安(代客)",
+          "volume": 13433,
+          "varVolume": -1946,
+          "partyId": "0001",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 3,
+          "shortName": "海通期货(代客)",
+          "volume": 9024,
+          "varVolume": 61,
+          "partyId": "0133",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 4,
+          "shortName": "东证期货(代客)",
+          "volume": 4555,
+          "varVolume": -559,
+          "partyId": "0156",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 5,
+          "shortName": "银河期货(代客)",
+          "volume": 3564,
+          "varVolume": -61,
+          "partyId": "0109",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 6,
+          "shortName": "华泰期货(代客)",
+          "volume": 3349,
+          "varVolume": 142,
+          "partyId": "0011",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 7,
+          "shortName": "广发期货(代客)",
+          "volume": 2994,
+          "varVolume": -287,
+          "partyId": "0016",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 8,
+          "shortName": "瑞银期货(代客)",
+          "volume": 2953,
+          "varVolume": -91,
+          "partyId": "0317",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 9,
+          "shortName": "国投期货(代客)",
+          "volume": 2879,
+          "varVolume": 315,
+          "partyId": "0122",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 10,
+          "shortName": "申银万国(代客)",
+          "volume": 2457,
+          "varVolume": -121,
+          "partyId": "0131",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 11,
+          "shortName": "中金期货(代客)",
+          "volume": 2242,
+          "varVolume": 236,
+          "partyId": "0172",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 12,
+          "shortName": "国信期货(代客)",
+          "volume": 1998,
+          "varVolume": 58,
+          "partyId": "0113",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 13,
+          "shortName": "中银期货(代客)",
+          "volume": 1972,
+          "varVolume": -312,
+          "partyId": "0165",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 14,
+          "shortName": "中泰期货(代客)",
+          "volume": 1773,
+          "varVolume": 328,
+          "partyId": "0006",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 15,
+          "shortName": "光大期货(代客)",
+          "volume": 1750,
+          "varVolume": -438,
+          "partyId": "0007",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 16,
+          "shortName": "招商期货(代客)",
+          "volume": 1636,
+          "varVolume": -196,
+          "partyId": "0136",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 17,
+          "shortName": "永安期货(代客)",
+          "volume": 1602,
+          "varVolume": -443,
+          "partyId": "0003",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 18,
+          "shortName": "华闻期货(代客)",
+          "volume": 1530,
+          "varVolume": -89,
+          "partyId": "0125",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 19,
+          "shortName": "浙商期货(代客)",
+          "volume": 1144,
+          "varVolume": 508,
+          "partyId": "0009",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 20,
+          "shortName": "中信建投(代客)",
+          "volume": 1139,
+          "varVolume": -26,
+          "partyId": "0115",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        }
+      ]
+    },
+    "IF2607": {
+      "instrumentId": "IF2607",
+      "tradingDay": "20260612",
+      "summary": {
+        "totalVolume": 15191,
+        "totalBuyPosition": 17206,
+        "totalSellPosition": 18030,
+        "netPosition": -824
+      },
+      "volumeRankings": [
+        {
+          "rank": 1,
+          "shortName": "中信期货(代客)",
+          "volume": 3051,
+          "varVolume": 123,
+          "partyId": "0018",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 2,
+          "shortName": "海通期货(代客)",
+          "volume": 2401,
+          "varVolume": 264,
+          "partyId": "0133",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 3,
+          "shortName": "东证期货(代客)",
+          "volume": 2279,
+          "varVolume": 113,
+          "partyId": "0156",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 4,
+          "shortName": "国泰君安(代客)",
+          "volume": 2129,
+          "varVolume": 259,
+          "partyId": "0001",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 5,
+          "shortName": "国信期货(代客)",
+          "volume": 749,
+          "varVolume": 11,
+          "partyId": "0113",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 6,
+          "shortName": "中金期货(代客)",
+          "volume": 666,
+          "varVolume": 339,
+          "partyId": "0172",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 7,
+          "shortName": "五矿期货(代客)",
+          "volume": 618,
+          "varVolume": 16,
+          "partyId": "0012",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 8,
+          "shortName": "广发期货(代客)",
+          "volume": 423,
+          "varVolume": 191,
+          "partyId": "0016",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 9,
+          "shortName": "华闻期货(代客)",
+          "volume": 391,
+          "varVolume": -87,
+          "partyId": "0125",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 10,
+          "shortName": "华泰期货(代客)",
+          "volume": 358,
+          "varVolume": 162,
+          "partyId": "0011",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 11,
+          "shortName": "银河期货(代客)",
+          "volume": 275,
+          "varVolume": 32,
+          "partyId": "0109",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 12,
+          "shortName": "大越期货(代客)",
+          "volume": 259,
+          "varVolume": -22,
+          "partyId": "0195",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 13,
+          "shortName": "永安期货(代客)",
+          "volume": 238,
+          "varVolume": 103,
+          "partyId": "0003",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 14,
+          "shortName": "招商期货(代客)",
+          "volume": 220,
+          "varVolume": 21,
+          "partyId": "0136",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 15,
+          "shortName": "中信建投(代客)",
+          "volume": 217,
+          "varVolume": 107,
+          "partyId": "0115",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 16,
+          "shortName": "宏源期货(代客)",
+          "volume": 207,
+          "varVolume": 119,
+          "partyId": "0137",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 17,
+          "shortName": "浙商期货(代客)",
+          "volume": 200,
+          "varVolume": 107,
+          "partyId": "0009",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 18,
+          "shortName": "光大期货(代客)",
+          "volume": 189,
+          "varVolume": 86,
+          "partyId": "0007",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 19,
+          "shortName": "申银万国(代客)",
+          "volume": 170,
+          "varVolume": 123,
+          "partyId": "0131",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 20,
+          "shortName": "国投期货(代客)",
+          "volume": 151,
+          "varVolume": 23,
+          "partyId": "0122",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        }
+      ],
+      "buyPositionRankings": [
+        {
+          "rank": 1,
+          "shortName": "中信期货(代客)",
+          "volume": 4089,
+          "varVolume": -81,
+          "partyId": "0018",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 2,
+          "shortName": "大越期货(代客)",
+          "volume": 2279,
+          "varVolume": 156,
+          "partyId": "0195",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 3,
+          "shortName": "国泰君安(代客)",
+          "volume": 1702,
+          "varVolume": 196,
+          "partyId": "0001",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 4,
+          "shortName": "海通期货(代客)",
+          "volume": 1617,
+          "varVolume": 22,
+          "partyId": "0133",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 5,
+          "shortName": "广发期货(代客)",
+          "volume": 1069,
+          "varVolume": 11,
+          "partyId": "0016",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 6,
+          "shortName": "恒力期货(代客)",
+          "volume": 907,
+          "varVolume": 107,
+          "partyId": "0161",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 7,
+          "shortName": "光大期货(代客)",
+          "volume": 898,
+          "varVolume": 119,
+          "partyId": "0007",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 8,
+          "shortName": "国联期货(代客)",
+          "volume": 815,
+          "varVolume": 0,
+          "partyId": "0118",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 9,
+          "shortName": "东证期货(代客)",
+          "volume": 719,
+          "varVolume": 101,
+          "partyId": "0156",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 10,
+          "shortName": "国信期货(代客)",
+          "volume": 514,
+          "varVolume": 71,
+          "partyId": "0113",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 11,
+          "shortName": "银河期货(代客)",
+          "volume": 500,
+          "varVolume": 104,
+          "partyId": "0109",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 12,
+          "shortName": "宝城期货(代客)",
+          "volume": 412,
+          "varVolume": 21,
+          "partyId": "0110",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 13,
+          "shortName": "摩根大通(代客)",
+          "volume": 309,
+          "varVolume": 8,
+          "partyId": "0323",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 14,
+          "shortName": "招商期货(代客)",
+          "volume": 294,
+          "varVolume": 1,
+          "partyId": "0136",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 15,
+          "shortName": "华泰期货(代客)",
+          "volume": 232,
+          "varVolume": -28,
+          "partyId": "0011",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 16,
+          "shortName": "永安期货(代客)",
+          "volume": 223,
+          "varVolume": 66,
+          "partyId": "0003",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 17,
+          "shortName": "中信建投(代客)",
+          "volume": 171,
+          "varVolume": 1,
+          "partyId": "0115",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 18,
+          "shortName": "东海期货(代客)",
+          "volume": 160,
+          "varVolume": -5,
+          "partyId": "0008",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 19,
+          "shortName": "申银万国(代客)",
+          "volume": 158,
+          "varVolume": 60,
+          "partyId": "0131",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 20,
+          "shortName": "兴证期货(代客)",
+          "volume": 138,
+          "varVolume": 12,
+          "partyId": "0102",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        }
+      ],
+      "sellPositionRankings": [
+        {
+          "rank": 1,
+          "shortName": "国泰君安(代客)",
+          "volume": 3413,
+          "varVolume": -37,
+          "partyId": "0001",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 2,
+          "shortName": "中信期货(代客)",
+          "volume": 3013,
+          "varVolume": 162,
+          "partyId": "0018",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 3,
+          "shortName": "海通期货(代客)",
+          "volume": 1917,
+          "varVolume": 91,
+          "partyId": "0133",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 4,
+          "shortName": "瑞银期货(代客)",
+          "volume": 1684,
+          "varVolume": -12,
+          "partyId": "0317",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 5,
+          "shortName": "中金期货(代客)",
+          "volume": 1387,
+          "varVolume": 666,
+          "partyId": "0172",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 6,
+          "shortName": "东证期货(代客)",
+          "volume": 1200,
+          "varVolume": -26,
+          "partyId": "0156",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 7,
+          "shortName": "中信建投(代客)",
+          "volume": 845,
+          "varVolume": -22,
+          "partyId": "0115",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 8,
+          "shortName": "中银期货(代客)",
+          "volume": 560,
+          "varVolume": 1,
+          "partyId": "0165",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 9,
+          "shortName": "华泰期货(代客)",
+          "volume": 551,
+          "varVolume": -52,
+          "partyId": "0011",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 10,
+          "shortName": "广发期货(代客)",
+          "volume": 543,
+          "varVolume": 156,
+          "partyId": "0016",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 11,
+          "shortName": "国投期货(代客)",
+          "volume": 456,
+          "varVolume": 7,
+          "partyId": "0122",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 12,
+          "shortName": "银河期货(代客)",
+          "volume": 436,
+          "varVolume": 7,
+          "partyId": "0109",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 13,
+          "shortName": "国信期货(代客)",
+          "volume": 406,
+          "varVolume": -30,
+          "partyId": "0113",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 14,
+          "shortName": "招商期货(代客)",
+          "volume": 396,
+          "varVolume": -37,
+          "partyId": "0136",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 15,
+          "shortName": "中金财富(代客)",
+          "volume": 289,
+          "varVolume": 24,
+          "partyId": "0168",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 16,
+          "shortName": "永安期货(代客)",
+          "volume": 228,
+          "varVolume": 46,
+          "partyId": "0003",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 17,
+          "shortName": "平安期货(代客)",
+          "volume": 214,
+          "varVolume": 3,
+          "partyId": "0105",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 18,
+          "shortName": "华闻期货(代客)",
+          "volume": 202,
+          "varVolume": -39,
+          "partyId": "0125",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 19,
+          "shortName": "宏源期货(代客)",
+          "volume": 152,
+          "varVolume": 47,
+          "partyId": "0137",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 20,
+          "shortName": "海证期货(代客)",
+          "volume": 138,
+          "varVolume": 21,
+          "partyId": "0155",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        }
+      ]
+    },
+    "IF2609": {
+      "instrumentId": "IF2609",
+      "tradingDay": "20260612",
+      "summary": {
+        "totalVolume": 59806,
+        "totalBuyPosition": 85193,
+        "totalSellPosition": 93164,
+        "netPosition": -7971
+      },
+      "volumeRankings": [
+        {
+          "rank": 1,
+          "shortName": "中信期货(代客)",
+          "volume": 13809,
+          "varVolume": 2197,
+          "partyId": "0018",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 2,
+          "shortName": "国泰君安(代客)",
+          "volume": 11612,
+          "varVolume": 8,
+          "partyId": "0001",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 3,
+          "shortName": "海通期货(代客)",
+          "volume": 5724,
+          "varVolume": 696,
+          "partyId": "0133",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 4,
+          "shortName": "国信期货(代客)",
+          "volume": 4417,
+          "varVolume": 925,
+          "partyId": "0113",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 5,
+          "shortName": "东证期货(代客)",
+          "volume": 3532,
+          "varVolume": -60,
+          "partyId": "0156",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 6,
+          "shortName": "华闻期货(代客)",
+          "volume": 2519,
+          "varVolume": 562,
+          "partyId": "0125",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 7,
+          "shortName": "中泰期货(代客)",
+          "volume": 2175,
+          "varVolume": 46,
+          "partyId": "0006",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 8,
+          "shortName": "银河期货(代客)",
+          "volume": 1781,
+          "varVolume": 108,
+          "partyId": "0109",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 9,
+          "shortName": "国投期货(代客)",
+          "volume": 1485,
+          "varVolume": 913,
+          "partyId": "0122",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 10,
+          "shortName": "永安期货(代客)",
+          "volume": 1475,
+          "varVolume": 618,
+          "partyId": "0003",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 11,
+          "shortName": "华泰期货(代客)",
+          "volume": 1466,
+          "varVolume": 333,
+          "partyId": "0011",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 12,
+          "shortName": "广发期货(代客)",
+          "volume": 1405,
+          "varVolume": 480,
+          "partyId": "0016",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 13,
+          "shortName": "瑞达期货(代客)",
+          "volume": 1294,
+          "varVolume": 259,
+          "partyId": "0170",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 14,
+          "shortName": "光大期货(代客)",
+          "volume": 1223,
+          "varVolume": -299,
+          "partyId": "0007",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 15,
+          "shortName": "五矿期货(代客)",
+          "volume": 1117,
+          "varVolume": 150,
+          "partyId": "0012",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 16,
+          "shortName": "招商期货(代客)",
+          "volume": 1009,
+          "varVolume": 326,
+          "partyId": "0136",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 17,
+          "shortName": "南华期货(代客)",
+          "volume": 999,
+          "varVolume": 11,
+          "partyId": "0002",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 18,
+          "shortName": "浙商期货(代客)",
+          "volume": 993,
+          "varVolume": 375,
+          "partyId": "0009",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 19,
+          "shortName": "方正中期(代客)",
+          "volume": 938,
+          "varVolume": 152,
+          "partyId": "0167",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 20,
+          "shortName": "中信建投(代客)",
+          "volume": 833,
+          "varVolume": 86,
+          "partyId": "0115",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        }
+      ],
+      "buyPositionRankings": [
+        {
+          "rank": 1,
+          "shortName": "国泰君安(代客)",
+          "volume": 24465,
+          "varVolume": 682,
+          "partyId": "0001",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 2,
+          "shortName": "中信期货(代客)",
+          "volume": 9774,
+          "varVolume": 1891,
+          "partyId": "0018",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 3,
+          "shortName": "海通期货(代客)",
+          "volume": 8824,
+          "varVolume": 362,
+          "partyId": "0133",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 4,
+          "shortName": "广发期货(代客)",
+          "volume": 5118,
+          "varVolume": 324,
+          "partyId": "0016",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 5,
+          "shortName": "银河期货(代客)",
+          "volume": 3623,
+          "varVolume": -18,
+          "partyId": "0109",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 6,
+          "shortName": "东证期货(代客)",
+          "volume": 3459,
+          "varVolume": 295,
+          "partyId": "0156",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 7,
+          "shortName": "浙商期货(代客)",
+          "volume": 3286,
+          "varVolume": -41,
+          "partyId": "0009",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 8,
+          "shortName": "招商期货(代客)",
+          "volume": 3143,
+          "varVolume": 46,
+          "partyId": "0136",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 9,
+          "shortName": "国投期货(代客)",
+          "volume": 2524,
+          "varVolume": 191,
+          "partyId": "0122",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 10,
+          "shortName": "永安期货(代客)",
+          "volume": 2429,
+          "varVolume": 204,
+          "partyId": "0003",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 11,
+          "shortName": "光大期货(代客)",
+          "volume": 2392,
+          "varVolume": -119,
+          "partyId": "0007",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 12,
+          "shortName": "华泰期货(代客)",
+          "volume": 2263,
+          "varVolume": 35,
+          "partyId": "0011",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 13,
+          "shortName": "宝城期货(代客)",
+          "volume": 2207,
+          "varVolume": 69,
+          "partyId": "0110",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 14,
+          "shortName": "国信期货(代客)",
+          "volume": 2079,
+          "varVolume": 389,
+          "partyId": "0113",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 15,
+          "shortName": "五矿期货(代客)",
+          "volume": 2067,
+          "varVolume": 141,
+          "partyId": "0012",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 16,
+          "shortName": "大越期货(代客)",
+          "volume": 2054,
+          "varVolume": 15,
+          "partyId": "0195",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 17,
+          "shortName": "中金期货(代客)",
+          "volume": 1487,
+          "varVolume": 0,
+          "partyId": "0172",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 18,
+          "shortName": "申银万国(代客)",
+          "volume": 1479,
+          "varVolume": 47,
+          "partyId": "0131",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 19,
+          "shortName": "兴证期货(代客)",
+          "volume": 1314,
+          "varVolume": 14,
+          "partyId": "0102",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 20,
+          "shortName": "平安期货(代客)",
+          "volume": 1206,
+          "varVolume": -24,
+          "partyId": "0105",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        }
+      ],
+      "sellPositionRankings": [
+        {
+          "rank": 1,
+          "shortName": "华泰期货(代客)",
+          "volume": 15556,
+          "varVolume": 71,
+          "partyId": "0011",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 2,
+          "shortName": "中信期货(代客)",
+          "volume": 14541,
+          "varVolume": 98,
+          "partyId": "0018",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 3,
+          "shortName": "国泰君安(代客)",
+          "volume": 11544,
+          "varVolume": 1120,
+          "partyId": "0001",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 4,
+          "shortName": "国信期货(代客)",
+          "volume": 5839,
+          "varVolume": 796,
+          "partyId": "0113",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 5,
+          "shortName": "海通期货(代客)",
+          "volume": 5510,
+          "varVolume": 412,
+          "partyId": "0133",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 6,
+          "shortName": "摩根大通(代客)",
+          "volume": 4437,
+          "varVolume": 6,
+          "partyId": "0323",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 7,
+          "shortName": "东证期货(代客)",
+          "volume": 3941,
+          "varVolume": 77,
+          "partyId": "0156",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 8,
+          "shortName": "广发期货(代客)",
+          "volume": 3835,
+          "varVolume": 89,
+          "partyId": "0016",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 9,
+          "shortName": "瑞银期货(代客)",
+          "volume": 3748,
+          "varVolume": 0,
+          "partyId": "0317",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 10,
+          "shortName": "银河期货(代客)",
+          "volume": 3639,
+          "varVolume": 191,
+          "partyId": "0109",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 11,
+          "shortName": "招商期货(代客)",
+          "volume": 2966,
+          "varVolume": 241,
+          "partyId": "0136",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 12,
+          "shortName": "申银万国(代客)",
+          "volume": 2712,
+          "varVolume": -77,
+          "partyId": "0131",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 13,
+          "shortName": "方正中期(代客)",
+          "volume": 2620,
+          "varVolume": -43,
+          "partyId": "0167",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 14,
+          "shortName": "中金财富(代客)",
+          "volume": 2598,
+          "varVolume": 88,
+          "partyId": "0168",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 15,
+          "shortName": "国投期货(代客)",
+          "volume": 2480,
+          "varVolume": -22,
+          "partyId": "0122",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 16,
+          "shortName": "光大期货(代客)",
+          "volume": 1953,
+          "varVolume": -244,
+          "partyId": "0007",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 17,
+          "shortName": "永安期货(代客)",
+          "volume": 1887,
+          "varVolume": -199,
+          "partyId": "0003",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 18,
+          "shortName": "中泰期货(代客)",
+          "volume": 1314,
+          "varVolume": 215,
+          "partyId": "0006",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 19,
+          "shortName": "宏源期货(代客)",
+          "volume": 1106,
+          "varVolume": 22,
+          "partyId": "0137",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 20,
+          "shortName": "华闻期货(代客)",
+          "volume": 938,
+          "varVolume": -43,
+          "partyId": "0125",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        }
+      ]
+    },
+    "IF2612": {
+      "instrumentId": "IF2612",
+      "tradingDay": "20260612",
+      "summary": {
+        "totalVolume": 19761,
+        "totalBuyPosition": 30879,
+        "totalSellPosition": 34276,
+        "netPosition": -3397
+      },
+      "volumeRankings": [
+        {
+          "rank": 1,
+          "shortName": "中信期货(代客)",
+          "volume": 4028,
+          "varVolume": 1021,
+          "partyId": "0018",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 2,
+          "shortName": "国泰君安(代客)",
+          "volume": 3703,
+          "varVolume": 993,
+          "partyId": "0001",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 3,
+          "shortName": "海通期货(代客)",
+          "volume": 3228,
+          "varVolume": 512,
+          "partyId": "0133",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 4,
+          "shortName": "东证期货(代客)",
+          "volume": 1637,
+          "varVolume": -121,
+          "partyId": "0156",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 5,
+          "shortName": "国信期货(代客)",
+          "volume": 1036,
+          "varVolume": 105,
+          "partyId": "0113",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 6,
+          "shortName": "华闻期货(代客)",
+          "volume": 804,
+          "varVolume": 86,
+          "partyId": "0125",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 7,
+          "shortName": "国投期货(代客)",
+          "volume": 731,
+          "varVolume": 538,
+          "partyId": "0122",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 8,
+          "shortName": "中泰期货(代客)",
+          "volume": 675,
+          "varVolume": -29,
+          "partyId": "0006",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 9,
+          "shortName": "中金期货(代客)",
+          "volume": 672,
+          "varVolume": 284,
+          "partyId": "0172",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 10,
+          "shortName": "南华期货(代客)",
+          "volume": 447,
+          "varVolume": 390,
+          "partyId": "0002",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 11,
+          "shortName": "广发期货(代客)",
+          "volume": 423,
+          "varVolume": 210,
+          "partyId": "0016",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 12,
+          "shortName": "光大期货(代客)",
+          "volume": 405,
+          "varVolume": 232,
+          "partyId": "0007",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 13,
+          "shortName": "招商期货(代客)",
+          "volume": 369,
+          "varVolume": 107,
+          "partyId": "0136",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 14,
+          "shortName": "银河期货(代客)",
+          "volume": 310,
+          "varVolume": 0,
+          "partyId": "0109",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 15,
+          "shortName": "港信期货(代客)",
+          "volume": 310,
+          "varVolume": 310,
+          "partyId": "0332",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 16,
+          "shortName": "华泰期货(代客)",
+          "volume": 281,
+          "varVolume": -50,
+          "partyId": "0011",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 17,
+          "shortName": "五矿期货(代客)",
+          "volume": 256,
+          "varVolume": 81,
+          "partyId": "0012",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 18,
+          "shortName": "中信建投(代客)",
+          "volume": 160,
+          "varVolume": -5,
+          "partyId": "0115",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 19,
+          "shortName": "浙商期货(代客)",
+          "volume": 144,
+          "varVolume": 91,
+          "partyId": "0009",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 20,
+          "shortName": "宏源期货(代客)",
+          "volume": 142,
+          "varVolume": 91,
+          "partyId": "0137",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        }
+      ],
+      "buyPositionRankings": [
+        {
+          "rank": 1,
+          "shortName": "国泰君安(代客)",
+          "volume": 5256,
+          "varVolume": -21,
+          "partyId": "0001",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 2,
+          "shortName": "中信期货(代客)",
+          "volume": 3394,
+          "varVolume": 480,
+          "partyId": "0018",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 3,
+          "shortName": "瑞银期货(代客)",
+          "volume": 2898,
+          "varVolume": 65,
+          "partyId": "0317",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 4,
+          "shortName": "浙商期货(代客)",
+          "volume": 2610,
+          "varVolume": -7,
+          "partyId": "0009",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 5,
+          "shortName": "大越期货(代客)",
+          "volume": 2239,
+          "varVolume": 1,
+          "partyId": "0195",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 6,
+          "shortName": "海通期货(代客)",
+          "volume": 2111,
+          "varVolume": 564,
+          "partyId": "0133",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 7,
+          "shortName": "广发期货(代客)",
+          "volume": 1346,
+          "varVolume": 251,
+          "partyId": "0016",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 8,
+          "shortName": "国信期货(代客)",
+          "volume": 1287,
+          "varVolume": 92,
+          "partyId": "0113",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 9,
+          "shortName": "中金期货(代客)",
+          "volume": 1231,
+          "varVolume": 672,
+          "partyId": "0172",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 10,
+          "shortName": "东证期货(代客)",
+          "volume": 1114,
+          "varVolume": 303,
+          "partyId": "0156",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 11,
+          "shortName": "申银万国(代客)",
+          "volume": 1078,
+          "varVolume": 20,
+          "partyId": "0131",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 12,
+          "shortName": "中银期货(代客)",
+          "volume": 1027,
+          "varVolume": 16,
+          "partyId": "0165",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 13,
+          "shortName": "银河期货(代客)",
+          "volume": 868,
+          "varVolume": -7,
+          "partyId": "0109",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 14,
+          "shortName": "光大期货(代客)",
+          "volume": 851,
+          "varVolume": 183,
+          "partyId": "0007",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 15,
+          "shortName": "华泰期货(代客)",
+          "volume": 729,
+          "varVolume": -27,
+          "partyId": "0011",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 16,
+          "shortName": "中金财富(代客)",
+          "volume": 703,
+          "varVolume": 26,
+          "partyId": "0168",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 17,
+          "shortName": "长江期货(代客)",
+          "volume": 611,
+          "varVolume": -7,
+          "partyId": "0116",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 18,
+          "shortName": "招商期货(代客)",
+          "volume": 606,
+          "varVolume": 10,
+          "partyId": "0136",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 19,
+          "shortName": "兴证期货(代客)",
+          "volume": 488,
+          "varVolume": -10,
+          "partyId": "0102",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 20,
+          "shortName": "南华期货(代客)",
+          "volume": 432,
+          "varVolume": 122,
+          "partyId": "0002",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        }
+      ],
+      "sellPositionRankings": [
+        {
+          "rank": 1,
+          "shortName": "中信期货(代客)",
+          "volume": 7395,
+          "varVolume": 1066,
+          "partyId": "0018",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 2,
+          "shortName": "国泰君安(代客)",
+          "volume": 4178,
+          "varVolume": -712,
+          "partyId": "0001",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 3,
+          "shortName": "华泰期货(代客)",
+          "volume": 3697,
+          "varVolume": 100,
+          "partyId": "0011",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 4,
+          "shortName": "东证期货(代客)",
+          "volume": 2736,
+          "varVolume": 316,
+          "partyId": "0156",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 5,
+          "shortName": "海通期货(代客)",
+          "volume": 2543,
+          "varVolume": 134,
+          "partyId": "0133",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 6,
+          "shortName": "摩根大通(代客)",
+          "volume": 2161,
+          "varVolume": -20,
+          "partyId": "0323",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 7,
+          "shortName": "招商期货(代客)",
+          "volume": 2019,
+          "varVolume": 143,
+          "partyId": "0136",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 8,
+          "shortName": "国投期货(代客)",
+          "volume": 1435,
+          "varVolume": 517,
+          "partyId": "0122",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 9,
+          "shortName": "中金财富(代客)",
+          "volume": 1372,
+          "varVolume": 40,
+          "partyId": "0168",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 10,
+          "shortName": "银河期货(代客)",
+          "volume": 1060,
+          "varVolume": -11,
+          "partyId": "0109",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 11,
+          "shortName": "国信期货(代客)",
+          "volume": 757,
+          "varVolume": 410,
+          "partyId": "0113",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 12,
+          "shortName": "中信建投(代客)",
+          "volume": 666,
+          "varVolume": 16,
+          "partyId": "0115",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 13,
+          "shortName": "申银万国(代客)",
+          "volume": 648,
+          "varVolume": 7,
+          "partyId": "0131",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 14,
+          "shortName": "华闻期货(代客)",
+          "volume": 620,
+          "varVolume": 93,
+          "partyId": "0125",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 15,
+          "shortName": "广发期货(代客)",
+          "volume": 595,
+          "varVolume": 12,
+          "partyId": "0016",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 16,
+          "shortName": "光大期货(代客)",
+          "volume": 566,
+          "varVolume": 104,
+          "partyId": "0007",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 17,
+          "shortName": "海证期货(代客)",
+          "volume": 560,
+          "varVolume": -4,
+          "partyId": "0155",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 18,
+          "shortName": "兴业期货(代客)",
+          "volume": 463,
+          "varVolume": 32,
+          "partyId": "0306",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 19,
+          "shortName": "平安期货(代客)",
+          "volume": 428,
+          "varVolume": -2,
+          "partyId": "0105",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        },
+        {
+          "rank": 20,
+          "shortName": "永安期货(代客)",
+          "volume": 377,
+          "varVolume": -9,
+          "partyId": "0003",
+          "tradingDay": "20260612",
+          "productId": "IF"
+        }
+      ]
+    }
+  }
+}

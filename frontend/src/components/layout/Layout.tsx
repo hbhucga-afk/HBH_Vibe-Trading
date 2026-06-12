@@ -1,6 +1,6 @@
 ﻿import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useSearchParams } from "react-router-dom";
-import { BarChart3, Bot, Moon, Sun, Plus, Trash2, Pencil, MessageSquare, ChevronsLeft, ChevronsRight, Settings, Layers, Loader2, TrendingUp, CircleDollarSign, ArrowLeftRight } from "lucide-react";
+import { BarChart3, Bot, Moon, Sun, Plus, Trash2, Pencil, MessageSquare, ChevronsLeft, ChevronsRight, Settings, Layers, Loader2, TrendingUp, CircleDollarSign, ArrowLeftRight, Banknote } from "lucide-react";
 import { RobotIcon } from "@/components/common/RobotIcon";
 import { cn } from "@/lib/utils";
 import { useDarkMode } from "@/hooks/useDarkMode";
@@ -15,6 +15,7 @@ const NAV = [
   { to: "/", icon: TrendingUp, label: "市场总览" },
   { to: "/gold", icon: CircleDollarSign, label: "黄金" },
   { to: "/futures", icon: ArrowLeftRight, label: "股指期货" },
+  { to: "/fund-flow", icon: Banknote, label: "板块资金" },
   { to: "/robot-research", icon: RobotIcon, label: "人形机器人" },
   { to: "/agent", icon: Bot, label: "Agent" },
   { to: "/alpha-zoo", icon: Layers, label: "Alpha Zoo" },
